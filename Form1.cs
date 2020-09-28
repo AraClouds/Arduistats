@@ -36,11 +36,11 @@ namespace Arduistats
         {
            // outToRichLog("before component");
             InitializeComponent();
-            outToRichLog("Engine loaded...");
+            OutToRichLog("Engine loaded...");
             Debug.WriteLine("Engine loaded... \n");
              //  InitTimer();
-            outToRichLog("Checking serial ports...");
-            initBase();
+            OutToRichLog("Checking serial ports...");
+            InitBase();
             // init storage
             storage = new LocalStorage();
 
@@ -59,10 +59,10 @@ namespace Arduistats
 
         }
 
-        private void initBase()
+        private void InitBase()
         {
             ports = SerialPort.GetPortNames();
-            outToRichLog("Checking serial ports...");
+            OutToRichLog("Checking serial ports...");
             Debug.WriteLine("Ports : \n");
             Debug.WriteLine(ports);
             //afficher log loading
@@ -70,7 +70,7 @@ namespace Arduistats
 
         }
 
-        async static Task<string> getTxt()
+        async static Task<string> GetTxt()
         {
             HttpClient client = new HttpClient();
             string result = await client.GetStringAsync(url);
@@ -88,18 +88,18 @@ namespace Arduistats
         public void InitTimer()
         {
             timer1 = new Timer();
-            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Tick += new EventHandler(Timer1_Tick);
             timer1.Interval = refresh; // in miliseconds
             timer1.Start();
         }
 
-        private async void timer1_Tick(object sender, EventArgs e)
+        private async void Timer1_Tick(object sender, EventArgs e)
         {
              
-            userout = await getTxt();
+            userout = await GetTxt();
             /*  string data_rx = port.ReadLine();*/
             Debug.WriteLine("TEST STRING ASYNC    "+ userout);
-            outToRichLog("write from timerTick" + userout);
+            OutToRichLog("write from timerTick" + userout);
         }
 
 
@@ -127,9 +127,9 @@ namespace Arduistats
             return string.Empty;
         }
 
-        private void btn_serielConnect_Click(object sender, EventArgs e)
+        private void Btn_serielConnect_Click(object sender, EventArgs e)
         {
-
+            // TODO IMPORTANT : trouver un moyen de disconnect proprement
             selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
             port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
             port.DtrEnable = true;
@@ -140,30 +140,21 @@ namespace Arduistats
             text_iSconnected.Text = port.IsOpen.ToString();
 
             if (port.IsOpen == true) {
-                //  outToRichLog("֍ Connected to " + selectedPort);
-                //       SerialDisconnect();
+
                 port.Close();
                 btn_readShit.Enabled = true;
                 isConnected = false;
-             //   Debug.WriteLine("FILS DE PUTE EST IL FERME APRES PORT.CLOSE   " + port.IsOpen);
+
             }
             else if (port.IsOpen == false) {
                 btn_serielConnect.Text = "Disconnect";
-                
-             //   btn_serielConnect.Enabled = true;
-                outToRichLog("► Port of XXX is open");
+                OutToRichLog("► Port of XXX is open");
                 port.Open();
-           //     Debug.WriteLine("FILS DE PUTE EST IL OUVERT APRES PORT.OPEN   " + port.IsOpen);
-                // ça bougera dans une fonction activate
-                   port.DataReceived += serialPort1_DataReceived;
                 isConnected = true;
-
                 InitTimer();
             }
 
-
             text_iSconnected.Text = port.IsOpen.ToString();
-
 
         }
 
@@ -177,14 +168,15 @@ namespace Arduistats
           //  Debug.WriteLine(a);
         }
 
-        private void write_Click(object sender, EventArgs e)
+        private void Btn_listenToArduino_Click(object sender, EventArgs e)
         {
-        
+            // TODO RICH Now let arduino Speak...
+            port.DataReceived += SerialPort1_DataReceived;
         }
 
-        void outToRichLog(string output)
+        void OutToRichLog(string output)
         {
-
+            // TODO ajouter string type string output avec couleurs et charmap
             
 
 
@@ -203,7 +195,7 @@ namespace Arduistats
 
         }
 
-        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
       
                 string line = port.ReadLine();
@@ -222,19 +214,20 @@ namespace Arduistats
         {
             //What to do with the received line here
             Debug.WriteLine("test + line : " + line);
-            outToRichLog(line);
+            OutToRichLog(line);
 
        //     storage.Get(key);
 
 
             port.WriteLine(userout);
-            outToRichLog("write from LineReceived" + userout);
+            OutToRichLog("write from LineReceived" + userout);
             // progressBar1.Value = int.Parse(line);
         }
 
 
-        private void btn_startphpfetch_Click(object sender, EventArgs e)
+        private void Btn_StartPHPfetch_Click(object sender, EventArgs e)
         {
+            // TODO RICH START PHP LOOP
             InitTimer();
         }
 
@@ -242,8 +235,8 @@ namespace Arduistats
         {
             //test
             var porttostring = port.IsOpen;
-            outToRichLog(porttostring.ToString());
-            outToRichLog(selectedPort);
+            OutToRichLog(porttostring.ToString());
+            OutToRichLog(selectedPort);
         }
     }
 }

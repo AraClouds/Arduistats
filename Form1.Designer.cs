@@ -31,7 +31,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_serielConnect = new System.Windows.Forms.Button();
             this.PortInfos = new System.Windows.Forms.Button();
-            this.write = new System.Windows.Forms.Button();
+            this.btn_listenToArduino = new System.Windows.Forms.Button();
             this.RichLogBox = new System.Windows.Forms.RichTextBox();
             this.btn_readShit = new System.Windows.Forms.Button();
             this.btn_startphpfetch = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@
             this.btn_serielConnect.TabIndex = 1;
             this.btn_serielConnect.Text = "Serial connect";
             this.btn_serielConnect.UseVisualStyleBackColor = true;
-            this.btn_serielConnect.Click += new System.EventHandler(this.btn_serielConnect_Click);
+            this.btn_serielConnect.Click += new System.EventHandler(this.Btn_serielConnect_Click);
             // 
             // PortInfos
             // 
@@ -69,15 +69,15 @@
             this.PortInfos.UseVisualStyleBackColor = true;
             this.PortInfos.Click += new System.EventHandler(this.PortInfos_Click);
             // 
-            // write
+            // btn_listenToArduino
             // 
-            this.write.Location = new System.Drawing.Point(588, 12);
-            this.write.Name = "write";
-            this.write.Size = new System.Drawing.Size(75, 23);
-            this.write.TabIndex = 3;
-            this.write.Text = "write";
-            this.write.UseVisualStyleBackColor = true;
-            this.write.Click += new System.EventHandler(this.write_Click);
+            this.btn_listenToArduino.Location = new System.Drawing.Point(212, 416);
+            this.btn_listenToArduino.Name = "btn_listenToArduino";
+            this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
+            this.btn_listenToArduino.TabIndex = 3;
+            this.btn_listenToArduino.Text = "listen";
+            this.btn_listenToArduino.UseVisualStyleBackColor = true;
+            this.btn_listenToArduino.Click += new System.EventHandler(this.Btn_listenToArduino_Click);
             // 
             // RichLogBox
             // 
@@ -111,7 +111,7 @@
             this.btn_startphpfetch.TabIndex = 6;
             this.btn_startphpfetch.Text = "Start php loop";
             this.btn_startphpfetch.UseVisualStyleBackColor = true;
-            this.btn_startphpfetch.Click += new System.EventHandler(this.btn_startphpfetch_Click);
+            this.btn_startphpfetch.Click += new System.EventHandler(this.Btn_StartPHPfetch_Click);
             // 
             // text_iSconnected
             // 
@@ -161,7 +161,7 @@
             this.Controls.Add(this.btn_startphpfetch);
             this.Controls.Add(this.btn_readShit);
             this.Controls.Add(this.RichLogBox);
-            this.Controls.Add(this.write);
+            this.Controls.Add(this.btn_listenToArduino);
             this.Controls.Add(this.PortInfos);
             this.Controls.Add(this.btn_serielConnect);
             this.Controls.Add(this.comboBox1);
@@ -179,7 +179,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btn_serielConnect;
         private System.Windows.Forms.Button PortInfos;
-        private System.Windows.Forms.Button write;
+        private System.Windows.Forms.Button btn_listenToArduino;
         private System.Windows.Forms.RichTextBox RichLogBox;
         private System.Windows.Forms.Button btn_readShit;
         private System.Windows.Forms.Button btn_startphpfetch;

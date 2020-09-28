@@ -61,7 +61,6 @@ C:\Users\Araviel\source\repos\Arduistats\bin\Debug\netcoreapp3.1\runtimes\linux\
 C:\Users\Araviel\source\repos\Arduistats\bin\Debug\netcoreapp3.1\runtimes\osx\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\Araviel\source\repos\Arduistats\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\Araviel\source\repos\Arduistats\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Management.dll
-C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csprojAssemblyReference.cache
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.MainWindow.resources
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csproj.GenerateResource.cache
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.AssemblyInfoInputs.cache
@@ -71,3 +70,4 @@ C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.cspr
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.dll
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.pdb
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.genruntimeconfig.cache
+C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csprojAssemblyReference.cache
