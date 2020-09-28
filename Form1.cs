@@ -249,6 +249,7 @@ namespace Arduistats
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //test
             var porttostring = port.IsOpen;
             outToRichLog(porttostring.ToString());
             outToRichLog(selectedPort);
