@@ -64,8 +64,10 @@ C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.Form
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csproj.GenerateResource.cache
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.AssemblyInfoInputs.cache
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.AssemblyInfo.cs
-C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csproj.CoreCompileInputs.cache
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csproj.CopyComplete
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.dll
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.pdb
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.genruntimeconfig.cache
+C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csprojAssemblyReference.cache
+C:\Users\Araviel\source\repos\Arduistats\bin\Debug\netcoreapp3.1\LocalStorage.dll
+C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csproj.CoreCompileInputs.cache

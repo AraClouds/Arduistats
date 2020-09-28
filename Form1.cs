@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Management;
+using Hanssens.Net;
 
 namespace Arduistats
 {
@@ -23,6 +24,7 @@ namespace Arduistats
         string selectedPort;
         SerialPort port;
         private Timer timer1;
+        public static object storage;
         
         //Config
         const string url = "https://www.araclouds.com/ct/users.txt";
@@ -39,6 +41,8 @@ namespace Arduistats
              //  InitTimer();
             outToRichLog("Checking serial ports...");
             initBase();
+            // init storage
+            storage = new LocalStorage();
 
             foreach (string port in ports)
             {
@@ -66,14 +70,20 @@ namespace Arduistats
 
         }
 
-        async static void getTxt()
+        async static Task<int> getTxt()
         {
             HttpClient client = new HttpClient();
             string result = await client.GetStringAsync(url);
 
             char ch = '|';
             int freq = result.Count(f => (f == ch));
-            
+
+            var key = "phpusers";
+            var value = freq;
+
+
+            //    storage.Store(key, value);
+            return freq;
             Debug.WriteLine(result);
             Debug.WriteLine(freq);
         }
@@ -232,6 +242,10 @@ namespace Arduistats
             //What to do with the received line here
             Debug.WriteLine("test" + line);
             outToRichLog(line);
+
+       //     storage.Get(key);
+
+
             port.WriteLine("5");
 
             // progressBar1.Value = int.Parse(line);

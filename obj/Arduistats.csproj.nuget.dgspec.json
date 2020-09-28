@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[1.11.24, )"
             },
+            "LocalStorage": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "System.IO.Ports": {
               "target": "Package",
               "version": "[4.7.0, )"
