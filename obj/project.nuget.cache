@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jxHKVJOokAAEC2Hc88u1IZWDzGdifBQDcLx3aiduUCKFOBuwlRYOooM0BrSI345rwLeW/Wn5pqDgiOICJmMOJQ==",
+  "dgSpecHash": "pw8UbfylgH05Hw9Ovim5O76iQLvZi3QhvSu2H8PXy7dm5jYUzuWaAgH3cBNHNM6VUBHCcdxs5PnJGKC3fXzuQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Araviel\\source\\repos\\LiveVisitsArduino\\Arduistats.csproj",
+  "projectFilePath": "C:\\Users\\Araviel\\source\\repos\\Arduistats\\Arduistats.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Araviel\\.nuget\\packages\\google.apis\\1.49.0\\google.apis.1.49.0.nupkg.sha512",
     "C:\\Users\\Araviel\\.nuget\\packages\\google.apis.analytics.v3\\1.49.0.1679\\google.apis.analytics.v3.1.49.0.1679.nupkg.sha512",

@@ -866,11 +866,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Araviel\\source\\repos\\LiveVisitsArduino\\Arduistats.csproj",
+      "projectUniqueName": "C:\\Users\\Araviel\\source\\repos\\Arduistats\\Arduistats.csproj",
       "projectName": "Arduistats",
-      "projectPath": "C:\\Users\\Araviel\\source\\repos\\LiveVisitsArduino\\Arduistats.csproj",
+      "projectPath": "C:\\Users\\Araviel\\source\\repos\\Arduistats\\Arduistats.csproj",
       "packagesPath": "C:\\Users\\Araviel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Araviel\\source\\repos\\LiveVisitsArduino\\obj\\",
+      "outputPath": "C:\\Users\\Araviel\\source\\repos\\Arduistats\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Araviel\\AppData\\Roaming\\NuGet\\NuGet.Config",
