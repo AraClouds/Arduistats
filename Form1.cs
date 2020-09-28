@@ -70,7 +70,7 @@ namespace Arduistats
 
         }
 
-        async static Task<int> getTxt()
+        async static Task<string> getTxt()
         {
             HttpClient client = new HttpClient();
             string result = await client.GetStringAsync(url);
@@ -83,7 +83,7 @@ namespace Arduistats
 
 
             //    storage.Store(key, value);
-            return freq;
+            return freq.ToString();
             Debug.WriteLine(result);
             Debug.WriteLine(freq);
         }
@@ -96,11 +96,12 @@ namespace Arduistats
             timer1.Start();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
-             getTxt();
-          /*  string data_rx = port.ReadLine();
-            Debug.WriteLine(data_rx);*/
+             
+            string ip = await getTxt();
+            /*  string data_rx = port.ReadLine();*/
+            Debug.WriteLine("TEST STRING ASYNC    "+ ip);
         }
 
 
