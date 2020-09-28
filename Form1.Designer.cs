@@ -1,6 +1,6 @@
 ﻿namespace Arduistats
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         ///  Required designer variable.
@@ -37,6 +37,8 @@
             this.btn_startphpfetch = new System.Windows.Forms.Button();
             this.text_iSconnected = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -80,10 +82,12 @@
             // RichLogBox
             // 
             this.RichLogBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RichLogBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.RichLogBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RichLogBox.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.RichLogBox.Location = new System.Drawing.Point(12, 159);
             this.RichLogBox.Name = "RichLogBox";
+            this.RichLogBox.ReadOnly = true;
             this.RichLogBox.Size = new System.Drawing.Size(276, 254);
             this.RichLogBox.TabIndex = 4;
             this.RichLogBox.Text = "";
@@ -111,11 +115,10 @@
             // 
             // text_iSconnected
             // 
-            this.text_iSconnected.Location = new System.Drawing.Point(13, 130);
+            this.text_iSconnected.Location = new System.Drawing.Point(253, 12);
             this.text_iSconnected.Name = "text_iSconnected";
             this.text_iSconnected.Size = new System.Drawing.Size(100, 23);
             this.text_iSconnected.TabIndex = 7;
-            this.text_iSconnected.TextChanged += new System.EventHandler(this.text_iSconnected_TextChanged);
             // 
             // button1
             // 
@@ -127,11 +130,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 445);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(275, 80);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 420);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "is Arduino speaking ? (Serial.write)";
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(947, 582);
+            this.ClientSize = new System.Drawing.Size(843, 533);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.text_iSconnected);
             this.Controls.Add(this.btn_startphpfetch);
@@ -141,8 +165,10 @@
             this.Controls.Add(this.PortInfos);
             this.Controls.Add(this.btn_serielConnect);
             this.Controls.Add(this.comboBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Arduistats - Araclouds";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,6 +185,8 @@
         private System.Windows.Forms.Button btn_startphpfetch;
         private System.Windows.Forms.TextBox text_iSconnected;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

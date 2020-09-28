@@ -17,7 +17,7 @@ using Hanssens.Net;
 
 namespace Arduistats
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         bool isConnected;
         String[] ports;
@@ -25,14 +25,14 @@ namespace Arduistats
         SerialPort port;
         private Timer timer1;
         public static object storage;
-        
+        string userout;
         //Config
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
         //Config
         
 
-        public Form1()
+        public MainWindow()
         {
            // outToRichLog("before component");
             InitializeComponent();
@@ -81,11 +81,8 @@ namespace Arduistats
             var key = "phpusers";
             var value = freq;
 
-
-            //    storage.Store(key, value);
             return freq.ToString();
-            Debug.WriteLine(result);
-            Debug.WriteLine(freq);
+   
         }
 
         public void InitTimer()
@@ -99,9 +96,10 @@ namespace Arduistats
         private async void timer1_Tick(object sender, EventArgs e)
         {
              
-            string ip = await getTxt();
+            userout = await getTxt();
             /*  string data_rx = port.ReadLine();*/
-            Debug.WriteLine("TEST STRING ASYNC    "+ ip);
+            Debug.WriteLine("TEST STRING ASYNC    "+ userout);
+            outToRichLog("write from timerTick" + userout);
         }
 
 
@@ -132,18 +130,11 @@ namespace Arduistats
         private void btn_serielConnect_Click(object sender, EventArgs e)
         {
 
-      
-
             selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
             port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
             port.DtrEnable = true;
             port.RtsEnable = true;
             text_iSconnected.Text = isConnected.ToString();
-
-        
-            //  port.Close();
-            //     outToRichLog("֍ connected ? " + isConnected);
-
 
 
             text_iSconnected.Text = port.IsOpen.ToString();
@@ -154,7 +145,7 @@ namespace Arduistats
                 port.Close();
                 btn_readShit.Enabled = true;
                 isConnected = false;
-                Debug.WriteLine("FILS DE PUTE EST IL FERME APRES PORT.CLOSE   " + port.IsOpen);
+             //   Debug.WriteLine("FILS DE PUTE EST IL FERME APRES PORT.CLOSE   " + port.IsOpen);
             }
             else if (port.IsOpen == false) {
                 btn_serielConnect.Text = "Disconnect";
@@ -162,20 +153,14 @@ namespace Arduistats
              //   btn_serielConnect.Enabled = true;
                 outToRichLog("► Port of XXX is open");
                 port.Open();
-                Debug.WriteLine("FILS DE PUTE EST IL OUVERT APRES PORT.OPEN   " + port.IsOpen);
+           //     Debug.WriteLine("FILS DE PUTE EST IL OUVERT APRES PORT.OPEN   " + port.IsOpen);
                 // ça bougera dans une fonction activate
                    port.DataReceived += serialPort1_DataReceived;
                 isConnected = true;
 
-
-
                 InitTimer();
             }
 
-
-            //   string a = port.ReadExisting();
-            //   Debug.WriteLine(a);
-            //    Thread.Sleep(200);
 
             text_iSconnected.Text = port.IsOpen.ToString();
 
@@ -194,12 +179,7 @@ namespace Arduistats
 
         private void write_Click(object sender, EventArgs e)
         {
-            string serialinfo = comboBox1.GetItemText(comboBox1.SelectedItem);
-            // port.Write("#STAR\n");
-            port = new SerialPort(serialinfo, 9600, Parity.None, 8, StopBits.One);
-
-          
-           
+        
         }
 
         void outToRichLog(string output)
@@ -241,21 +221,17 @@ namespace Arduistats
         private void LineReceived(string line)
         {
             //What to do with the received line here
-            Debug.WriteLine("test" + line);
+            Debug.WriteLine("test + line : " + line);
             outToRichLog(line);
 
        //     storage.Get(key);
 
 
-            port.WriteLine("5");
-
+            port.WriteLine(userout);
+            outToRichLog("write from LineReceived" + userout);
             // progressBar1.Value = int.Parse(line);
         }
 
-        private void text_iSconnected_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private void btn_startphpfetch_Click(object sender, EventArgs e)
         {

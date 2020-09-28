@@ -92,20 +92,33 @@ void loop()
     }
     // if you get a newline, print the string, then the string's value:
     if (inChar == '\n') {
+      myGLCD.setColor(140, 0, 0);
+      myGLCD.printNumI(888,CENTER,120);
+        myGLCD.setBackColor(0, 0, 0);
+       delay(150);
+       myGLCD.setBackColor(0, 0, 0);
       Serial.print("Value:");
       Serial.println(inString.toInt());
       Serial.print("String: ");
       Serial.println(inString);
-      myGLCD.print(inString, CENTER, 120);
+    //  myGLCD.print(inString, CENTER, 120);
+    myGLCD.setColor(0, 255, 100);
+   
+     myGLCD.printNumI(inString.toInt(),CENTER,120);
+    
       // clear the string for new input:
+  /*     delay(150);
       inString = "";
+       delay(150);*/
+       myGLCD.setBackColor(0, 0, 0);
+          delay(2050);
+       inString = "";
+      
+      // myGLCD.print("", CENTER, 120);
       delay(2050);
+       inString = "";
+      //  myGLCD.clrScr();
     }
   }
 
-
- String getTextToPrint()
-    {
-      String value = inputString.substring(5,inputString.length()-2);
-      return value;
-    }
+}
