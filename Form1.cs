@@ -73,13 +73,10 @@ namespace Arduistats
              //   ishttpConnected = true;
                 
             }
-            Debug.WriteLine(result);
-            char ch = '|';
-            int freq = result.Count(f => (f == ch));
-            var key = "phpusers";
-            var value = freq;
+          //  Debug.WriteLine(result);
+           
             // TODO il faut sortir tout le txt et le traiter autre part
-            return freq.ToString();
+            return result;
    
         }
 
@@ -115,10 +112,16 @@ namespace Arduistats
         {
              try
             {
-                userout = await GetTxt();
+                string fetchedTxt = await GetTxt();
+                char ch = '|';
+                int freq = fetchedTxt.Count(f => (f == ch));
+                var key = "phpusers";
+                var value = freq;
+                userout = freq.ToString();
                 httpStatus.Text = "Connected";
                 CheckDifferentCounting(userout, _storedUserOut);
-              //  OutToRichLog("abouger", "write from timer : " + userout);
+            //    Debug.WriteLine(result);
+                //  OutToRichLog("abouger", "write from timer : " + userout);
             }
             catch (HttpRequestException ex)
             {
