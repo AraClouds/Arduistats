@@ -1,13 +1,3 @@
-// UTFT_ViewFont 
-// Copyright (C)2015 Rinky-Dink Electronics, Henning Karlsen. All right reserved
-// web: http://www.RinkyDinkElectronics.com/
-//
-// This program is a demo of the included fonts.
-//
-// This demo was made for modules with a screen resolution 
-// of 320x240 pixels.
-//
-// This program requires the UTFT library.
 //
 
 #include <UTFT.h>
@@ -18,9 +8,6 @@ extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
 extern uint8_t SixteenSegment64x96Num[];
 String inString = "";
-String inputString = "";         // a string to hold incoming data
-boolean stringComplete = false;  // whether the string is complete
-String commandString = "";
 
 // Set the pins to the correct ones for your development shield
 // ------------------------------------------------------------
@@ -31,10 +18,7 @@ String commandString = "";
 //
 // Remember to change the model parameter to suit your display module!
 UTFT myGLCD(ILI9341_16,38,39,40,41);
-/*
-String inputString = "";         // a string to hold incoming data
-boolean stringComplete = false;  // whether the string is complete
-String commandString = "";*/
+
 String  incomingByte;
 void setup()
 {
@@ -107,9 +91,6 @@ void loop()
      myGLCD.printNumI(inString.toInt(),CENTER,120);
     
       // clear the string for new input:
-  /*     delay(150);
-      inString = "";
-       delay(150);*/
        myGLCD.setBackColor(0, 0, 0);
           delay(2050);
        inString = "";
@@ -117,7 +98,6 @@ void loop()
       // myGLCD.print("", CENTER, 120);
       delay(2050);
        inString = "";
-      //  myGLCD.clrScr();
     }
   }
 

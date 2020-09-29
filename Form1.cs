@@ -36,23 +36,15 @@ namespace Arduistats
         {
            // outToRichLog("before component");
             InitializeComponent();
-            OutToRichLog("Engine loaded...");
-            Debug.WriteLine("Engine loaded... \n");
+            OutToRichLog("Frame", "Starting engine...");
+          
              //  InitTimer();
-            OutToRichLog("Checking serial ports...");
+        
             InitBase();
             // init storage
             storage = new LocalStorage();
 
-            foreach (string port in ports)
-            {
-                comboBox1.Items.Add(port);
-                Debug.WriteLine(port);
-                if (ports[0] != null)
-                {
-                    comboBox1.SelectedItem = ports[0];
-                }
-            }
+   
             /*  var doc = webload.Load(url);*/
 
 
@@ -62,11 +54,20 @@ namespace Arduistats
         private void InitBase()
         {
             ports = SerialPort.GetPortNames();
-            OutToRichLog("Checking serial ports...");
+            OutToRichLog("Frame", "Checking serial ports...");
             Debug.WriteLine("Ports : \n");
             Debug.WriteLine(ports);
             //afficher log loading
             //afficher les ports
+            foreach (string port in ports)
+            {
+                comboBox1.Items.Add(port);
+                OutToRichLog("Com", "Ports found : ");
+                if (ports[0] != null)
+                {
+                    comboBox1.SelectedItem = ports[0];
+                }
+            }
 
         }
 
@@ -99,7 +100,7 @@ namespace Arduistats
             userout = await GetTxt();
             /*  string data_rx = port.ReadLine();*/
             Debug.WriteLine("TEST STRING ASYNC    "+ userout);
-            OutToRichLog("write from timerTick" + userout);
+        //    OutToRichLog("write from timerTick" + userout);
         }
 
 
@@ -144,12 +145,14 @@ namespace Arduistats
                 port.Close();
                 btn_readShit.Enabled = true;
                 isConnected = false;
+                OutToRichLog("Com","Closing " + port.PortName);
 
             }
             else if (port.IsOpen == false) {
                 btn_serielConnect.Text = "Disconnect";
-                OutToRichLog("► Port of XXX is open");
                 port.Open();
+                AllowComControls();
+                OutToRichLog("Com", "Opening " + port.PortName);
                 isConnected = true;
                 InitTimer();
             }
@@ -158,7 +161,12 @@ namespace Arduistats
 
         }
 
-
+        private void AllowComControls()
+        {
+            //get info from current device (com)
+            //test write
+          
+        }
 
         private void PortInfos_Click(object sender, EventArgs e)
         {
@@ -174,15 +182,7 @@ namespace Arduistats
             port.DataReceived += SerialPort1_DataReceived;
         }
 
-        void OutToRichLog(string output)
-        {
-            // TODO ajouter string type string output avec couleurs et charmap
-            
 
-
-            RichLogBox.AppendText(output + "\r\n");
-            RichLogBox.ScrollToCaret();
-        }
 
 
         private void btn_readShit_Click(object sender, EventArgs e)
@@ -214,13 +214,14 @@ namespace Arduistats
         {
             //What to do with the received line here
             Debug.WriteLine("test + line : " + line);
-            OutToRichLog(line);
 
-       //     storage.Get(key);
+            OutToRichLog("Com", "Received from " + port.PortName + line);
 
+            //     storage.Get(key);
 
+            //a bouger
             port.WriteLine(userout);
-            OutToRichLog("write from LineReceived" + userout);
+            OutToRichLog("abouger", "write from LineReceived" + userout);
             // progressBar1.Value = int.Parse(line);
         }
 
@@ -231,12 +232,23 @@ namespace Arduistats
             InitTimer();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Btn_GetCurPortInfo_Click(object sender, EventArgs e)
         {
             //test
             var porttostring = port.IsOpen;
-            OutToRichLog(porttostring.ToString());
-            OutToRichLog(selectedPort);
+            //ajouter port name et tout
+        //    OutToRichLog(porttostring.ToString());
+            
+            OutToRichLog("Com", "Current port info : " + porttostring.ToString());
+        }
+        void OutToRichLog(string type, string output)
+        {
+            // TODO ajouter string type string output avec couleurs et charmap
+
+
+
+            RichLogBox.AppendText(output + "\r\n");
+            RichLogBox.ScrollToCaret();
         }
     }
 }

@@ -36,7 +36,7 @@
             this.btn_readShit = new System.Windows.Forms.Button();
             this.btn_startphpfetch = new System.Windows.Forms.Button();
             this.text_iSconnected = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_GetCurPortInfo = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -71,7 +71,8 @@
             // 
             // btn_listenToArduino
             // 
-            this.btn_listenToArduino.Location = new System.Drawing.Point(212, 416);
+            this.btn_listenToArduino.Enabled = false;
+            this.btn_listenToArduino.Location = new System.Drawing.Point(94, 61);
             this.btn_listenToArduino.Name = "btn_listenToArduino";
             this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
             this.btn_listenToArduino.TabIndex = 3;
@@ -120,15 +121,16 @@
             this.text_iSconnected.Size = new System.Drawing.Size(100, 23);
             this.text_iSconnected.TabIndex = 7;
             // 
-            // button1
+            // Btn_GetCurPortInfo
             // 
-            this.button1.Location = new System.Drawing.Point(681, 260);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_GetCurPortInfo.Enabled = false;
+            this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(13, 61);
+            this.Btn_GetCurPortInfo.Name = "Btn_GetCurPortInfo";
+            this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(75, 23);
+            this.Btn_GetCurPortInfo.TabIndex = 8;
+            this.Btn_GetCurPortInfo.Text = "COM Info";
+            this.Btn_GetCurPortInfo.UseVisualStyleBackColor = true;
+            this.Btn_GetCurPortInfo.Click += new System.EventHandler(this.Btn_GetCurPortInfo_Click);
             // 
             // richTextBox1
             // 
@@ -156,7 +158,7 @@
             this.ClientSize = new System.Drawing.Size(843, 533);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Btn_GetCurPortInfo);
             this.Controls.Add(this.text_iSconnected);
             this.Controls.Add(this.btn_startphpfetch);
             this.Controls.Add(this.btn_readShit);
@@ -184,7 +186,7 @@
         private System.Windows.Forms.Button btn_readShit;
         private System.Windows.Forms.Button btn_startphpfetch;
         private System.Windows.Forms.TextBox text_iSconnected;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_GetCurPortInfo;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
     }
