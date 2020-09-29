@@ -32,10 +32,7 @@ namespace Arduistats
         //Config
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
-     //   private static bool ishttpConnected;
-
         //Config
-
 
         public MainWindow()
         {
@@ -79,10 +76,9 @@ namespace Arduistats
             Debug.WriteLine(result);
             char ch = '|';
             int freq = result.Count(f => (f == ch));
-
             var key = "phpusers";
             var value = freq;
-
+            // TODO il faut sortir tout le txt et le traiter autre part
             return freq.ToString();
    
         }
@@ -295,7 +291,6 @@ namespace Arduistats
         }
         void OutToRichLog(string type, string output)
         {
-            // TODO ajouter string type string output avec couleurs et charmap
             if (type == "HTTP")
             {
                 RichLogBox.ForeColor = System.Drawing.Color.LightGreen;
