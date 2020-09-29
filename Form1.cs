@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Management;
 using Hanssens.Net;
+using System.Net;
 
 namespace Arduistats
 {
@@ -27,10 +28,11 @@ namespace Arduistats
         public static object storage;
         string userout;
         string _storedUserOut;
+        bool isHttpConnected;
         //Config
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
-        private static bool ishttpConnected;
+     //   private static bool ishttpConnected;
 
         //Config
 
@@ -71,9 +73,10 @@ namespace Arduistats
             string result = await client.GetStringAsync(url);
             if (result != null)
             {
-                ishttpConnected = true;
+             //   ishttpConnected = true;
+                
             }
-
+            Debug.WriteLine(result);
             char ch = '|';
             int freq = result.Count(f => (f == ch));
 
@@ -117,12 +120,24 @@ namespace Arduistats
              try
             {
                 userout = await GetTxt();
+                httpStatus.Text = "Connected";
                 CheckDifferentCounting(userout, _storedUserOut);
               //  OutToRichLog("abouger", "write from timer : " + userout);
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                OutToRichLog("PHP", "Error while fetching txt data");
+
+                
+     //    Debug.WriteLine("ex.Data : " + ex.Data + "\n");
+      //          Debug.WriteLine("ex.HResult : " + ex.HResult + "\n");
+      //          Debug.WriteLine("ex.Message : " + ex.Message + "\n");
+                timer1.Stop();
+                httpStatus.Text = "Not connected";
+                var httpmessage = ex.Message;
+                OutToRichLog("HTTP", httpmessage.ToString());
+
+                
+                isHttpConnected = false;
             }
         }
 
