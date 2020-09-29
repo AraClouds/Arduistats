@@ -39,6 +39,8 @@
             this.Btn_GetCurPortInfo = new System.Windows.Forms.Button();
             this.RichArduinoIsSpeaking = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -61,7 +63,7 @@
             // 
             // PortInfos
             // 
-            this.PortInfos.Location = new System.Drawing.Point(758, 12);
+            this.PortInfos.Location = new System.Drawing.Point(431, 12);
             this.PortInfos.Name = "PortInfos";
             this.PortInfos.Size = new System.Drawing.Size(75, 23);
             this.PortInfos.TabIndex = 2;
@@ -89,14 +91,14 @@
             this.RichLogBox.Location = new System.Drawing.Point(12, 159);
             this.RichLogBox.Name = "RichLogBox";
             this.RichLogBox.ReadOnly = true;
-            this.RichLogBox.Size = new System.Drawing.Size(276, 254);
+            this.RichLogBox.Size = new System.Drawing.Size(311, 254);
             this.RichLogBox.TabIndex = 4;
             this.RichLogBox.Text = "";
             // 
             // btn_readShit
             // 
             this.btn_readShit.Enabled = false;
-            this.btn_readShit.Location = new System.Drawing.Point(758, 90);
+            this.btn_readShit.Location = new System.Drawing.Point(431, 70);
             this.btn_readShit.Name = "btn_readShit";
             this.btn_readShit.Size = new System.Drawing.Size(75, 23);
             this.btn_readShit.TabIndex = 5;
@@ -106,7 +108,7 @@
             // 
             // btn_startphpfetch
             // 
-            this.btn_startphpfetch.Location = new System.Drawing.Point(758, 61);
+            this.btn_startphpfetch.Location = new System.Drawing.Point(431, 41);
             this.btn_startphpfetch.Name = "btn_startphpfetch";
             this.btn_startphpfetch.Size = new System.Drawing.Size(75, 23);
             this.btn_startphpfetch.TabIndex = 6;
@@ -135,28 +137,45 @@
             // RichArduinoIsSpeaking
             // 
             this.RichArduinoIsSpeaking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RichArduinoIsSpeaking.Location = new System.Drawing.Point(12, 445);
+            this.RichArduinoIsSpeaking.Location = new System.Drawing.Point(12, 496);
             this.RichArduinoIsSpeaking.Name = "RichArduinoIsSpeaking";
             this.RichArduinoIsSpeaking.ReadOnly = true;
             this.RichArduinoIsSpeaking.Size = new System.Drawing.Size(275, 80);
             this.RichArduinoIsSpeaking.TabIndex = 9;
             this.RichArduinoIsSpeaking.Text = "";
-            
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 420);
+            this.label1.Location = new System.Drawing.Point(12, 478);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 15);
             this.label1.TabIndex = 10;
             this.label1.Text = "is Arduino speaking ? (Serial.write)";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(13, 420);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(53, 23);
+            this.textBox1.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(72, 423);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 15);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "HTTP STATUS";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 533);
+            this.ClientSize = new System.Drawing.Size(651, 588);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RichArduinoIsSpeaking);
             this.Controls.Add(this.Btn_GetCurPortInfo);
@@ -190,6 +209,8 @@
         private System.Windows.Forms.Button Btn_GetCurPortInfo;
         private System.Windows.Forms.RichTextBox RichArduinoIsSpeaking;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

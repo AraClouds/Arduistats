@@ -26,37 +26,29 @@ namespace Arduistats
         private Timer timer1;
         public static object storage;
         string userout;
+        string _storedUserOut;
         //Config
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
+        private static bool ishttpConnected;
+
         //Config
-        
+
 
         public MainWindow()
         {
-           // outToRichLog("before component");
             InitializeComponent();
             OutToRichLog("Frame", "Starting engine...");
-          
-             //  InitTimer();
-        
             InitBase();
             // init storage
             storage = new LocalStorage();
-
-   
             /*  var doc = webload.Load(url);*/
-
-
-
         }
 
         private void InitBase()
         {
             ports = SerialPort.GetPortNames();
             OutToRichLog("Frame", "Checking serial ports...");
-            Debug.WriteLine("Ports : \n");
-            Debug.WriteLine(ports);
             //afficher log loading
             //afficher les ports
             OutToRichLog("Com", "Ports found : ");
@@ -77,6 +69,10 @@ namespace Arduistats
         {
             HttpClient client = new HttpClient();
             string result = await client.GetStringAsync(url);
+            if (result != null)
+            {
+                ishttpConnected = true;
+            }
 
             char ch = '|';
             int freq = result.Count(f => (f == ch));
@@ -96,31 +92,38 @@ namespace Arduistats
             timer1.Start();
         }
 
+        // CheckDifferentCounting : si la variable reçue du txt est la même que la précédente, ne rien faire.
+        public void CheckDifferentCounting(string checkreceiveduser, string checkwithcurrentuser)
+        {
+            Debug.WriteLine(userout + "   " + _storedUserOut);
+            if (checkreceiveduser != checkwithcurrentuser)
+            {
+                OutToRichLog("HTTP", "Different count detected");
+                OutToRichLog("COM", "Sending to arduino");
+                //  DoSomething(); //write
+                port.WriteLine(userout);
 
-
+                _storedUserOut = userout;
+            }
+            else
+            {
+               // OutToRichLog("PHP", "No different count detected");
+              //  userout = _storedUserOut;
+            }
+        }
 
         private async void Timer1_Tick(object sender, EventArgs e)
         {
              try
             {
                 userout = await GetTxt();
-                port.WriteLine(userout);
-                OutToRichLog("abouger", "write from timer : " + userout);
+                CheckDifferentCounting(userout, _storedUserOut);
+              //  OutToRichLog("abouger", "write from timer : " + userout);
             }
             catch
             {
                 OutToRichLog("PHP", "Error while fetching txt data");
             }
-            /*  string data_rx = port.ReadLine();*/
-            // Debug.WriteLine("TEST STRING ASYNC    "+ userout);
-
-            //
-            // TODO : si même value don't write
-            //
-      
-
-            
-            //    OutToRichLog("write from timerTick" + userout);
         }
 
 
@@ -192,8 +195,9 @@ namespace Arduistats
                 AllowComControls();
                 //faire un fade ou un truc qui montre que c co
 
-                OutToRichLog("Com", "Opening " + port.PortName);
+                OutToRichLog("Com", "Opening " + port.PortName + "...");
                 isConnected = true;
+                OutToRichLog("HTTP", "Trying to read txt file.. ");
                 InitTimer();
             }
 
@@ -228,9 +232,6 @@ namespace Arduistats
 
         private void btn_readShit_Click(object sender, EventArgs e)
         {
-
-            
-            
             
          //      outToRichLog(phpUser.ToString);
 
@@ -245,9 +246,7 @@ namespace Arduistats
                 RichLogBox.ScrollToCaret();
        //     outToRichLog(line);
               //  Debug.WriteLine(line);
-    
-  
-     
+
            
         }
 
@@ -257,14 +256,8 @@ namespace Arduistats
         {
             //What to do with the received line here
             Debug.WriteLine("test + line : " + line);
-
             OutToRichLog("Com", "Received from " + port.PortName + line);
 
-            //     storage.Get(key);
-
-            //a bouger
-            
-            // progressBar1.Value = int.Parse(line);
         }
 
 
@@ -288,11 +281,24 @@ namespace Arduistats
         void OutToRichLog(string type, string output)
         {
             // TODO ajouter string type string output avec couleurs et charmap
-
-
-
-            RichLogBox.AppendText(output + "\r\n");
-            RichLogBox.ScrollToCaret();
+            if (type == "HTTP")
+            {
+                RichLogBox.ForeColor = System.Drawing.Color.LightGreen;
+                RichLogBox.AppendText("@ " + output + "\r\n");
+                RichLogBox.ScrollToCaret();
+            }
+            else if (type == "Com")
+            {
+                RichLogBox.ForeColor = System.Drawing.Color.SkyBlue;
+                RichLogBox.AppendText("● " + output + "\r\n");
+                RichLogBox.ScrollToCaret();
+            }
+            else
+            {
+                RichLogBox.AppendText(output + "\r\n");
+                RichLogBox.ScrollToCaret();
+            }
+           
         }
 
  
