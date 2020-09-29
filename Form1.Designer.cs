@@ -37,7 +37,7 @@
             this.btn_startphpfetch = new System.Windows.Forms.Button();
             this.text_iSconnected = new System.Windows.Forms.TextBox();
             this.Btn_GetCurPortInfo = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.RichArduinoIsSpeaking = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -132,15 +132,16 @@
             this.Btn_GetCurPortInfo.UseVisualStyleBackColor = true;
             this.Btn_GetCurPortInfo.Click += new System.EventHandler(this.Btn_GetCurPortInfo_Click);
             // 
-            // richTextBox1
+            // RichArduinoIsSpeaking
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 445);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(275, 80);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
+            this.RichArduinoIsSpeaking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RichArduinoIsSpeaking.Location = new System.Drawing.Point(12, 445);
+            this.RichArduinoIsSpeaking.Name = "RichArduinoIsSpeaking";
+            this.RichArduinoIsSpeaking.ReadOnly = true;
+            this.RichArduinoIsSpeaking.Size = new System.Drawing.Size(275, 80);
+            this.RichArduinoIsSpeaking.TabIndex = 9;
+            this.RichArduinoIsSpeaking.Text = "";
+            
             // 
             // label1
             // 
@@ -157,7 +158,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 533);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.RichArduinoIsSpeaking);
             this.Controls.Add(this.Btn_GetCurPortInfo);
             this.Controls.Add(this.text_iSconnected);
             this.Controls.Add(this.btn_startphpfetch);
@@ -187,7 +188,7 @@
         private System.Windows.Forms.Button btn_startphpfetch;
         private System.Windows.Forms.TextBox text_iSconnected;
         private System.Windows.Forms.Button Btn_GetCurPortInfo;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox RichArduinoIsSpeaking;
         private System.Windows.Forms.Label label1;
     }
 }

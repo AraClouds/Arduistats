@@ -8,6 +8,9 @@ extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
 extern uint8_t SixteenSegment64x96Num[];
 String inString = "";
+String inputString = "";         // a string to hold incoming data
+boolean stringComplete = false;  // whether the string is complete
+String commandString = "";
 
 // Set the pins to the correct ones for your development shield
 // ------------------------------------------------------------
@@ -98,6 +101,7 @@ void loop()
       // myGLCD.print("", CENTER, 120);
       delay(2050);
        inString = "";
+      //  myGLCD.clrScr();
     }
   }
 
