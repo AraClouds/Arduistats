@@ -126,20 +126,13 @@ namespace Arduistats
                 var value = freq;
                 userout = freq.ToString();
                 httpStatus.Text = "Connected";
-                CheckDifferentCounting(userout, _storedUserOut);
+                
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
                 string[] splitString = lastWrittenUser.Split(',');
                 editHours = 2;
                 int receivedHour;
                 receivedHour = Int16.Parse(splitString[3]);
                 int veritableHour = receivedHour += editHours;
-                // splitString[3] += editHours;
-                //   string sYear = splitString[1].Trim();
-                //  int iYear = Int16.Parse("100");
-
-
-                //   int year = lastWrittenUser.IndexOf(',');
-                //    int month = lastWrittenUser.IndexOf(',', lastWrittenUser.IndexOf(',') + 1);
                 //la date d'édition du fichier nous donnera le timeout visiteur
                 // convertir les deux en secondes, soustraire l'actual time avec le lastwrittenUser et si var time > x secondes write 0 a arduino
                 DateTime a = new DateTime(
@@ -154,11 +147,23 @@ namespace Arduistats
                 double secs = now.Subtract(a).TotalSeconds;
                 // secs.Split(',')[0].Trim();
                 string convert = secs.ToString();
-                string number = convert.Split(',')[0].Trim();
+                string secGap = convert.Split(',')[0].Trim();
+                int isecGap = Int16.Parse(secGap);
                 Debug.WriteLine(now.Subtract(a).TotalSeconds);
 
+                // mettre en variable option
+                if (isecGap > 40) {
+                    userout = "0";
+                    CheckDifferentCounting(userout, _storedUserOut);
+                    
+
+                } else
+                {
+                    CheckDifferentCounting(userout, _storedUserOut);
+                }
+
                 //  Debug.WriteLine(lastWrittenUser);
-                Debug.WriteLine("FINAL GAP : " + number + "\n");
+                Debug.WriteLine("FINAL GAP : " + secGap + "\n");
             //    Debug.WriteLine("renowwww date time : " + now + "\n");
                 //    Debug.WriteLine("year : " + year + "\n");
                 //     Debug.WriteLine("month : " + month + "\n\n");
