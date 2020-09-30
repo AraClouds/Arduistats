@@ -41,6 +41,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.httpStatus = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox_httpTickRate = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -63,7 +74,7 @@
             // 
             // PortInfos
             // 
-            this.PortInfos.Location = new System.Drawing.Point(431, 12);
+            this.PortInfos.Location = new System.Drawing.Point(353, 415);
             this.PortInfos.Name = "PortInfos";
             this.PortInfos.Size = new System.Drawing.Size(75, 23);
             this.PortInfos.TabIndex = 2;
@@ -74,7 +85,7 @@
             // btn_listenToArduino
             // 
             this.btn_listenToArduino.Enabled = false;
-            this.btn_listenToArduino.Location = new System.Drawing.Point(94, 61);
+            this.btn_listenToArduino.Location = new System.Drawing.Point(434, 341);
             this.btn_listenToArduino.Name = "btn_listenToArduino";
             this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
             this.btn_listenToArduino.TabIndex = 3;
@@ -98,7 +109,7 @@
             // btn_readShit
             // 
             this.btn_readShit.Enabled = false;
-            this.btn_readShit.Location = new System.Drawing.Point(431, 70);
+            this.btn_readShit.Location = new System.Drawing.Point(434, 455);
             this.btn_readShit.Name = "btn_readShit";
             this.btn_readShit.Size = new System.Drawing.Size(75, 23);
             this.btn_readShit.TabIndex = 5;
@@ -108,7 +119,7 @@
             // 
             // btn_startphpfetch
             // 
-            this.btn_startphpfetch.Location = new System.Drawing.Point(431, 41);
+            this.btn_startphpfetch.Location = new System.Drawing.Point(353, 455);
             this.btn_startphpfetch.Name = "btn_startphpfetch";
             this.btn_startphpfetch.Size = new System.Drawing.Size(75, 23);
             this.btn_startphpfetch.TabIndex = 6;
@@ -120,13 +131,13 @@
             // 
             this.text_iSconnected.Location = new System.Drawing.Point(253, 12);
             this.text_iSconnected.Name = "text_iSconnected";
-            this.text_iSconnected.Size = new System.Drawing.Size(100, 23);
+            this.text_iSconnected.Size = new System.Drawing.Size(70, 23);
             this.text_iSconnected.TabIndex = 7;
             // 
             // Btn_GetCurPortInfo
             // 
             this.Btn_GetCurPortInfo.Enabled = false;
-            this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(13, 61);
+            this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(353, 341);
             this.Btn_GetCurPortInfo.Name = "Btn_GetCurPortInfo";
             this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(75, 23);
             this.Btn_GetCurPortInfo.TabIndex = 8;
@@ -169,11 +180,118 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "HTTP STATUS";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(353, 290);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 28);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Toolbox";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(353, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 28);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Options";
+            // 
+            // comboBox_httpTickRate
+            // 
+            this.comboBox_httpTickRate.FormattingEnabled = true;
+            this.comboBox_httpTickRate.Location = new System.Drawing.Point(353, 130);
+            this.comboBox_httpTickRate.Name = "comboBox_httpTickRate";
+            this.comboBox_httpTickRate.Size = new System.Drawing.Size(75, 23);
+            this.comboBox_httpTickRate.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(434, 133);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 15);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "HTTP Tick rate";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(353, 159);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(75, 23);
+            this.textBox1.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(434, 162);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(153, 15);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "secs to consider user offline";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(353, 189);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(75, 23);
+            this.textBox2.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(434, 192);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(176, 15);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "your server actual time (in hour)";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(353, 72);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.PlaceholderText = "https://yourdomain.com";
+            this.textBox3.Size = new System.Drawing.Size(213, 23);
+            this.textBox3.TabIndex = 20;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(441, 301);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(167, 15);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "be ready for some app crashes";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(353, 496);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(151, 28);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Arduino control";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 588);
+            this.ClientSize = new System.Drawing.Size(718, 631);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox_httpTickRate);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.httpStatus);
             this.Controls.Add(this.label1);
@@ -190,7 +308,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Arduistats - Araclouds";
+            this.Text = "be ready for some app crashes";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +329,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox httpStatus;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox_httpTickRate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
 

@@ -1,8 +1,9 @@
-//
-
+// https://oleddisplay.squix.ch/#/home
+// https://github.com/ImpulseAdventure/GUIslice-Builder/releases
 #include <UTFT.h>
 
 // Declare which fonts we will be using
+//extern uint8_t Roboto_Mono_Thin_65[];
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
@@ -25,42 +26,41 @@ UTFT myGLCD(ILI9341_16,38,39,40,41);
 String  incomingByte;
 void setup()
 {
-  //pinMode(LED_BUILTIN, OUTPUT);
-   
-    Serial.begin(9600);
-    Serial.write("ALL ABOUT CIRCUITS!");//Send "ALL ABOUT CIRCUITS!" to the PC
+  Serial.begin(9600);
+  Serial.write("ALL ABOUT CIRCUITS!");//Send "ALL ABOUT CIRCUITS!" to the PC
   myGLCD.InitLCD();
-myGLCD.setContrast(5);
-myGLCD.setBrightness(5);
   myGLCD.clrScr();
+  httpStatus(true);
+  //Bottom rectangle website
+  myGLCD.setColor(255, 0, 0);
+  myGLCD.fillRect(0,210,319,400);
+  //bottom website name
+  myGLCD.setFont(BigFont);
+  myGLCD.print("www.araclouds.com", CENTER, 210);
 }
-/*
-void serialEvent() {
- 
+void httpStatus(bool htpstat){
+
+  if (htpstat == true) {
+    myGLCD.setFont(SmallFont);
+    myGLCD.print("HTTP CONNECTED", LEFT, 0);
+  }
+  
 }
-*/
 void loop()
 {
 
- Serial.println("tamere");
- delay(2050);                    // wait for a second
-
-  Serial.println("tamere");
-
-
-
-  
-   Serial.write("ALL ABOUT CIRCUITS!");//Send "ALL ABOUT CIRCUITS!" to the PC
+ delay(2000);                    
+  Serial.println("println alive");
+  Serial.write("write alive !"); //Send "write alive !" to the PC
   myGLCD.setColor(0, 255, 0);
   myGLCD.setBackColor(0, 0, 0);
-
   myGLCD.setFont(BigFont);
-  myGLCD.print(" !\"#$%&'()*+,-./", CENTER, 0);
+ /* myGLCD.print(" !\"#$%&'()*+,-./", CENTER, 0);
   myGLCD.print("0123456789:;<=>?", CENTER, 16);
   myGLCD.print("@ABCDEFGHIJKLMNO", CENTER, 32);
   myGLCD.print("PQRSTUVWXYZ[\\]^_", CENTER, 48);
   myGLCD.print("`abcdefghijklmno", CENTER, 64);
-  myGLCD.print("pqrstuvwxyz{|}~ ", CENTER, 80);
+  myGLCD.print("pqrstuvwxyz{|}~ ", CENTER, 80);*/
 
  /* myGLCD.setFont(SmallFont);
   myGLCD.print(" !\"#$%&'()*+,-./0123456789:;<=>?", CENTER, 120);
@@ -91,7 +91,7 @@ void loop()
     //  myGLCD.print(inString, CENTER, 120);
     myGLCD.setColor(0, 255, 100);
    
-     myGLCD.printNumI(inString.toInt(),CENTER,120);
+     myGLCD.printNumI(inString.toInt(),CENTER,80);
     
       // clear the string for new input:
        myGLCD.setBackColor(0, 0, 0);

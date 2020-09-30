@@ -38,6 +38,8 @@ namespace Arduistats
         int editHours;
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
+        private bool advancedDebug;
+
         //Config
 
         public MainWindow()
@@ -79,9 +81,7 @@ namespace Arduistats
              //   ishttpConnected = true;
                 
             }
-          //  Debug.WriteLine(result);
-           
-            // TODO il faut sortir tout le txt et le traiter autre part
+
             return result;
    
         }
@@ -155,32 +155,21 @@ namespace Arduistats
                 if (isecGap > 40) {
                     userout = "0";
                     CheckDifferentCounting(userout, _storedUserOut);
-                    
+                    if (advancedDebug == true) { OutToRichLog("HTTP", "No visitors since " + isecGap + " secs\n Sent 0 to arduino" ); }
 
                 } else
                 {
                     CheckDifferentCounting(userout, _storedUserOut);
+                    if ( advancedDebug == true) { OutToRichLog("HTTP", "New heartbeat received\nSent " + userout + " to arduino\n"); }
                 }
 
-                //  Debug.WriteLine(lastWrittenUser);
                 Debug.WriteLine("FINAL GAP : " + secGap + "\n");
-            //    Debug.WriteLine("renowwww date time : " + now + "\n");
-                //    Debug.WriteLine("year : " + year + "\n");
-                //     Debug.WriteLine("month : " + month + "\n\n");
-                //    Debug.WriteLine("splitString" + sYear + "\n");
-
-
-                //    
-                //  OutToRichLog("abouger", "write from timer : " + userout);
             }
             catch (HttpRequestException ex)
             {
 
-                
-     //    Debug.WriteLine("ex.Data : " + ex.Data + "\n");
-      //          Debug.WriteLine("ex.HResult : " + ex.HResult + "\n");
-      //          Debug.WriteLine("ex.Message : " + ex.Message + "\n");
-                timer1.Stop();
+               
+               // timer1.Stop();
                 httpStatus.Text = "Not connected";
                 var httpmessage = ex.Message;
                 OutToRichLog("HTTP", httpmessage.ToString());
@@ -344,11 +333,29 @@ namespace Arduistats
         }
         void OutToRichLog(string type, string output)
         {
+
+
             if (type == "HTTP")
             {
+               // string myfiles = Rich
                 RichLogBox.ForeColor = System.Drawing.Color.LightGreen;
                 RichLogBox.AppendText("@ " + output + "\r\n");
                 RichLogBox.ScrollToCaret();
+
+
+         /*       int line = 0;
+                foreach (string HTTP in myfiles)
+                {
+                    // Whatever method you want to choose a color, here
+                    // I'm just alternating between red and blue
+                    RichLogBox.SelectionColor =
+                        line % 2 == 0 ? Color.Red : Color.Blue;
+
+                    // AppendText is better than rtb.Text += ...
+                    RichLogBox.AppendText(HTTP + "\r\n");
+                    line++;
+                }*/
+
             }
             else if (type == "Com")
             {
@@ -364,6 +371,28 @@ namespace Arduistats
            
         }
 
- 
+        // TODO ColorTextBoxeSelection()
+
+        private void ColorTextBoxeSelection(RichTextBox textBox, string s, Color textColor, Color backColor)
+        {
+            int start = 0, current = 0;
+            RichTextBoxFinds options = RichTextBoxFinds.MatchCase;
+            start = textBox.Find(s, start, options);
+            while (start >= 0)
+            {
+                textBox.SelectionStart = start;
+                textBox.SelectionLength = s.Length;
+                textBox.SelectionColor = textColor;
+                textBox.SelectionBackColor = backColor;
+
+                current = start + s.Length;
+                if (current < textBox.TextLength)
+                    start = textBox.Find(s, current, options);
+                else
+                    break;
+            }
+        }
+
+
     }
 }
