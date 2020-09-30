@@ -70,3 +70,4 @@ C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.cspr
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.dll
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.pdb
 C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.genruntimeconfig.cache
+C:\Users\Araviel\source\repos\Arduistats\obj\Debug\netcoreapp3.1\Arduistats.csprojAssemblyReference.cache

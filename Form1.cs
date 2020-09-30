@@ -16,6 +16,11 @@ using System.Management;
 using Hanssens.Net;
 using System.Net;
 
+
+// Todo refaire UI + ajouter un bouton expand controls
+// ui arduino + blink si new visit
+
+
 namespace Arduistats
 {
     public partial class MainWindow : Form
@@ -30,6 +35,7 @@ namespace Arduistats
         string _storedUserOut;
         bool isHttpConnected;
         //Config
+        int editHours;
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
         //Config
@@ -112,6 +118,7 @@ namespace Arduistats
         {
              try
             {
+
                 string fetchedTxt = await GetTxt();
                 char ch = '|';
                 int freq = fetchedTxt.Count(f => (f == ch));
@@ -121,7 +128,43 @@ namespace Arduistats
                 httpStatus.Text = "Connected";
                 CheckDifferentCounting(userout, _storedUserOut);
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
-                Debug.WriteLine(lastWrittenUser);
+                string[] splitString = lastWrittenUser.Split(',');
+                editHours = 2;
+                int receivedHour;
+                receivedHour = Int16.Parse(splitString[3]);
+                int veritableHour = receivedHour += editHours;
+                // splitString[3] += editHours;
+                //   string sYear = splitString[1].Trim();
+                //  int iYear = Int16.Parse("100");
+
+
+                //   int year = lastWrittenUser.IndexOf(',');
+                //    int month = lastWrittenUser.IndexOf(',', lastWrittenUser.IndexOf(',') + 1);
+                //la date d'édition du fichier nous donnera le timeout visiteur
+                // convertir les deux en secondes, soustraire l'actual time avec le lastwrittenUser et si var time > x secondes write 0 a arduino
+                DateTime a = new DateTime(
+                    Int16.Parse(splitString[0]),
+                    Int16.Parse(splitString[1]),
+                    Int16.Parse(splitString[2]),
+                    veritableHour,
+                    Int16.Parse(splitString[4]),
+                    Int16.Parse(splitString[5]));
+               // DateTime b = new DateTime();
+                var now = DateTime.Now;
+                double secs = now.Subtract(a).TotalSeconds;
+                // secs.Split(',')[0].Trim();
+                string convert = secs.ToString();
+                string number = convert.Split(',')[0].Trim();
+                Debug.WriteLine(now.Subtract(a).TotalSeconds);
+
+                //  Debug.WriteLine(lastWrittenUser);
+                Debug.WriteLine("FINAL GAP : " + number + "\n");
+            //    Debug.WriteLine("renowwww date time : " + now + "\n");
+                //    Debug.WriteLine("year : " + year + "\n");
+                //     Debug.WriteLine("month : " + month + "\n\n");
+                //    Debug.WriteLine("splitString" + sYear + "\n");
+
+
                 //    
                 //  OutToRichLog("abouger", "write from timer : " + userout);
             }
