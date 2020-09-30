@@ -120,7 +120,9 @@ namespace Arduistats
                 userout = freq.ToString();
                 httpStatus.Text = "Connected";
                 CheckDifferentCounting(userout, _storedUserOut);
-            //    Debug.WriteLine(result);
+                string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
+                Debug.WriteLine(lastWrittenUser);
+                //    
                 //  OutToRichLog("abouger", "write from timer : " + userout);
             }
             catch (HttpRequestException ex)
