@@ -35,11 +35,11 @@ namespace Arduistats
         string _storedUserOut;
         bool isHttpConnected;
         //Config
-        int editHours;
         const string url = "https://www.araclouds.com/ct/users.txt";
         int refresh = 5000;
         private bool advancedDebug;
-
+        private double customUserHours = 0;
+        private double secondstoadd = 0;
         //Config
 
         public MainWindow()
@@ -47,9 +47,11 @@ namespace Arduistats
             InitializeComponent();
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
+            this.FormClosing += new FormClosingEventHandler(MainWindow_FormClosing);
             // init storage
             storage = new LocalStorage();
             /*  var doc = webload.Load(url);*/
+
         }
 
         private void InitBase()
@@ -105,13 +107,16 @@ namespace Arduistats
                 OutToRichLog("COM", "Sending to arduino");
                 //  DoSomething(); //write
                 port.WriteLine(userout);
+                if (advancedDebug == true) { OutToRichLog("HTTP", "CheckDifferentCounting() New heartbeat received\nSent " + userout + " to arduino\n"); }
 
                 _storedUserOut = userout;
             }
             else
             {
-               // OutToRichLog("PHP", "No different count detected");
-              //  userout = _storedUserOut;
+                if (advancedDebug == true) { OutToRichLog("HTTP", "CheckDifferentCounting() ELSE"); }
+             //   port.WriteLine("0");
+                // OutToRichLog("PHP", "No different count detected");
+                  userout = _storedUserOut;
             }
         }
         /// <summary>
@@ -137,11 +142,11 @@ namespace Arduistats
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
                 Debug.WriteLine("lastWrittenUser : " + lastWrittenUser);
                 string[] splitString = lastWrittenUser.Split(',');
-                Debug.WriteLine("  " + splitString[0] + splitString[1] + splitString[2] + splitString[3] + splitString[4] + splitString[5]);
-                editHours = 2;
+             //   Debug.WriteLine("  " + splitString[0] + splitString[1] + splitString[2] + splitString[3] + splitString[4] + splitString[5]);
+               /* editHours = 2;
                 int receivedHour;
                 receivedHour = Int16.Parse(splitString[3]);
-                int veritableHour = receivedHour += editHours;
+                int veritableHour = receivedHour += editHours;*/
                 //la date d'édition du fichier nous donnera le timeout visiteur
                 // convertir les deux en secondes, soustraire l'actual time avec le lastwrittenUser et si var time > x secondes write 0 a arduino
                 DateTime a = new DateTime(
@@ -154,13 +159,15 @@ namespace Arduistats
                 Debug.WriteLine("DateTime a =  " + a);
                 // DateTime b = new DateTime();
                 var now = DateTime.Now;
-                double secs = now.Subtract(a).TotalSeconds;
-                // secs.Split(',')[0].Trim();
-                string convert = secs.ToString();
+                double secs = now.Subtract(a).TotalSeconds; // ajouter les x secs avant la soustraction
+                // on ajoute le time reçu du serveur et on rajoute l'input user
+                double variableSecs = secs -= secondstoadd; // TODO brainfuck
+                string convert = variableSecs.ToString();
                 string secGap = convert.Split(',')[0].Trim();
+                Debug.WriteLine("SECGAPSECGAP" + secGap);
                 int isecGap = Int16.Parse(secGap);
                 Debug.WriteLine(now.Subtract(a).TotalSeconds);
-
+                advancedDebug = true;
                 // mettre en variable option
                 if (isecGap > 40) {
                     userout = "0";
@@ -170,9 +177,9 @@ namespace Arduistats
                 } else
                 {
                     CheckDifferentCounting(userout, _storedUserOut);
-                    if ( advancedDebug == true) { OutToRichLog("HTTP", "New heartbeat received\nSent " + userout + " to arduino\n"); }
+                  
                 }
-
+              //  port.WriteLine(secGap);
                 Debug.WriteLine("FINAL GAP : " + secGap + "\n");
             }
             catch (HttpRequestException ex)
@@ -415,6 +422,33 @@ namespace Arduistats
             }
         }
 
+        private void Inpt_ActualServerTime_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+
+
+      
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = MessageBox.Show("Are you sure you want to really exit ? ",
+                       "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No;
+        }
+
+        private void Inp_NumericHours_ValueChanged(object sender, EventArgs e)
+        {
+            var actualH = Inp_NumericHours.Text;
+            var todouble = Int16.Parse(actualH);
+            // customUserHours = Inpt_ActualServerTime.Text;
+            //    TimeSpan timespan = TimeSpan.FromHours(todouble);
+            secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
+            //  secondstoadd = timespan;
+
+
+            OutToRichLog("TEST", "customUserHours " + secondstoadd);
+            Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
+            //Inpt_ActualServerTime.
+        }
     }
 }

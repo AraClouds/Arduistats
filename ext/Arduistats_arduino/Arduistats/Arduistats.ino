@@ -140,7 +140,7 @@ void loop()
     //  myGLCD.print(inString, CENTER, 120);
     myGLCD.setColor(0, 255, 100);
    myGLCD.setFont(SixteenSegment64x96Num);
-     myGLCD.printNumI(inString.toInt(),CENTER + 20,80);
+     myGLCD.printNumI(inString.toInt(),LEFT,80);
     
       // clear the string for new input:
        myGLCD.setBackColor(0, 0, 0);

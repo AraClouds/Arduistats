@@ -47,11 +47,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Inpt_ActualServerTime = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.Inp_NumericHours = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -233,12 +236,15 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "secs to consider user offline";
             // 
-            // textBox2
+            // Inpt_ActualServerTime
             // 
-            this.textBox2.Location = new System.Drawing.Point(353, 189);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(75, 23);
-            this.textBox2.TabIndex = 18;
+            this.Inpt_ActualServerTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Inpt_ActualServerTime.Location = new System.Drawing.Point(392, 189);
+            this.Inpt_ActualServerTime.MaxLength = 2;
+            this.Inpt_ActualServerTime.Name = "Inpt_ActualServerTime";
+            this.Inpt_ActualServerTime.Size = new System.Drawing.Size(36, 23);
+            this.Inpt_ActualServerTime.TabIndex = 18;
+            this.Inpt_ActualServerTime.TextChanged += new System.EventHandler(this.Inpt_ActualServerTime_TextChanged);
             // 
             // label7
             // 
@@ -276,16 +282,34 @@
             this.label9.TabIndex = 13;
             this.label9.Text = "Arduino control";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(353, 189);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(33, 23);
+            this.comboBox2.TabIndex = 22;
+            // 
+            // Inp_NumericHours
+            // 
+            this.Inp_NumericHours.Location = new System.Drawing.Point(392, 237);
+            this.Inp_NumericHours.Name = "Inp_NumericHours";
+            this.Inp_NumericHours.Size = new System.Drawing.Size(120, 23);
+            this.Inp_NumericHours.TabIndex = 23;
+            this.Inp_NumericHours.ValueChanged += new System.EventHandler(this.Inp_NumericHours_ValueChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 631);
+            this.Controls.Add(this.Inp_NumericHours);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.Inpt_ActualServerTime);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
@@ -309,6 +333,7 @@
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "be ready for some app crashes";
+            ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,11 +360,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox Inpt_ActualServerTime;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.NumericUpDown Inp_NumericHours;
     }
 }
 
