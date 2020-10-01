@@ -4,6 +4,7 @@
 
 // Declare which fonts we will be using
 //extern uint8_t Roboto_Mono_Thin_65[];
+extern unsigned short zerovisit[4500];
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
@@ -143,8 +144,16 @@ void loop()
     myGLCD.setColor(0, 255, 100);
    myGLCD.setFont(SixteenSegment64x96Num);
     myGLCD.setBackColor(50, 50, 50);
-     myGLCD.printNumI(inString.toInt(),LEFT,80);
     
+    if (inString.toInt() == 0)
+    {
+      myGLCD.setBackColor(50, 50, 50);
+      myGLCD.drawBitmap(82, 82, 90, 50, zerovisit);
+     // myGLCD.print("***",LEFT,80);
+    }
+    else {
+       myGLCD.printNumI(inString.toInt(),LEFT,80);
+    }
       // clear the string for new input:
        myGLCD.setBackColor(0, 0, 0);
           delay(2050);

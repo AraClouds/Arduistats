@@ -20,6 +20,7 @@ using System.Net;
 // Todo refaire UI + ajouter un bouton expand controls
 // ui arduino + blink si new visit
 // TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user
+// TODO remplacer 0 par ... sur le display arduino
 
 
 namespace Arduistats
@@ -36,7 +37,7 @@ namespace Arduistats
         string _storedUserOut;
         bool isHttpConnected;
         //Config
-        const string url = "https://www.araclouds.com/ct/users.txt";
+        const string url = "https://www.araclouds.com/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
         int refresh = 5000;
         private bool advancedDebug;
         private double customUserHours = 0;
@@ -174,6 +175,7 @@ namespace Arduistats
                     userout = "0";
                     CheckDifferentCounting(userout, _storedUserOut);
                     if (advancedDebug == true) { OutToRichLog("HTTP", "No visitors since " + isecGap + " secs\n Sent 0 to arduino" ); }
+                  //  port.WriteLine("0");
 
                 } else
                 {
