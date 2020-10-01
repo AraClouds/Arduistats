@@ -53,12 +53,14 @@ void portStatus(bool portstat){
 
   if (portstat == true) {
     myGLCD.setFont(SmallFont);
-    myGLCD.print("PORT CONNECTED TO", LEFT, 0);
+     myGLCD.setBackColor(0, 0, 0);
+    myGLCD.print("PORT CONNECTED TO        ", LEFT, 0);
   }
   else {
     myGLCD.setFont(SmallFont);
+    myGLCD.setBackColor(0, 0, 0);
     myGLCD.setColor(130, 130, 130);
-    myGLCD.print("PORT CLOSED", LEFT, 0);
+    myGLCD.print("PORT CLOSED           ", LEFT, 0);
   }
   
 }
@@ -129,7 +131,7 @@ void loop()
     if (inChar == '\n') {
       
       myGLCD.setColor(140, 0, 0);
-      myGLCD.printNumI(888,CENTER,120);
+   //   myGLCD.printNumI(888,CENTER,120);
         myGLCD.setBackColor(0, 0, 0);
        delay(150);
        myGLCD.setBackColor(0, 0, 0);
@@ -140,6 +142,7 @@ void loop()
     //  myGLCD.print(inString, CENTER, 120);
     myGLCD.setColor(0, 255, 100);
    myGLCD.setFont(SixteenSegment64x96Num);
+    myGLCD.setBackColor(50, 50, 50);
      myGLCD.printNumI(inString.toInt(),LEFT,80);
     
       // clear the string for new input:
@@ -152,6 +155,9 @@ void loop()
        inString = "";
       //  myGLCD.clrScr();
     }
+    portStatus(false);
+  httpStatus(false);
   }
+  
 
 }

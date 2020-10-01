@@ -19,6 +19,7 @@ using System.Net;
 
 // Todo refaire UI + ajouter un bouton expand controls
 // ui arduino + blink si new visit
+// TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user
 
 
 namespace Arduistats
@@ -432,8 +433,16 @@ namespace Arduistats
       
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = MessageBox.Show("Are you sure you want to really exit ? ",
-                       "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No;
+            /* e.Cancel = MessageBox.Show("Are you sure you want to really exit ? ",
+                        "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No;*/
+            CloseAll();
+
+        }
+
+        private void CloseAll()
+        {
+            port.Close();
+            Debug.WriteLine("CLOSINGCLOSINGCLOSINGCLOSINGCLOSING : ");
         }
 
         private void Inp_NumericHours_ValueChanged(object sender, EventArgs e)
