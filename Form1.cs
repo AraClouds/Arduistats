@@ -92,6 +92,7 @@ namespace Arduistats
             timer1.Tick += new EventHandler(Timer1_Tick);
             timer1.Interval = refresh; // in miliseconds
             timer1.Start();
+            // TODO send is connected write toa rduino
         }
 
         // CheckDifferentCounting : si la variable reçue du txt est la même que la précédente, ne rien faire.
@@ -113,7 +114,11 @@ namespace Arduistats
               //  userout = _storedUserOut;
             }
         }
-
+        /// <summary>
+        /// Récupère la totalité du txt
+        /// 
+        /// This is mostly a copy and paste of a bit I found online (probably stack exchange)
+        /// </summary>
         private async void Timer1_Tick(object sender, EventArgs e)
         {
              try
@@ -127,8 +132,12 @@ namespace Arduistats
                 userout = freq.ToString();
                 httpStatus.Text = "Connected";
                 
+
+
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
+                Debug.WriteLine("lastWrittenUser : " + lastWrittenUser);
                 string[] splitString = lastWrittenUser.Split(',');
+                Debug.WriteLine("  " + splitString[0] + splitString[1] + splitString[2] + splitString[3] + splitString[4] + splitString[5]);
                 editHours = 2;
                 int receivedHour;
                 receivedHour = Int16.Parse(splitString[3]);
@@ -139,10 +148,11 @@ namespace Arduistats
                     Int16.Parse(splitString[0]),
                     Int16.Parse(splitString[1]),
                     Int16.Parse(splitString[2]),
-                    veritableHour,
+                    Int16.Parse(splitString[3]),
                     Int16.Parse(splitString[4]),
                     Int16.Parse(splitString[5]));
-               // DateTime b = new DateTime();
+                Debug.WriteLine("DateTime a =  " + a);
+                // DateTime b = new DateTime();
                 var now = DateTime.Now;
                 double secs = now.Subtract(a).TotalSeconds;
                 // secs.Split(',')[0].Trim();
@@ -237,6 +247,7 @@ namespace Arduistats
             if (port.IsOpen == true) {
 
                 port.Close();
+                // passer la value disconneced à l'arduino
                 btn_readShit.Enabled = true;
                 isConnected = false;
                 OutToRichLog("Com","Closing " + port.PortName);
@@ -244,14 +255,25 @@ namespace Arduistats
             }
             else if (port.IsOpen == false) {
                 btn_serielConnect.Text = "Disconnect";
-                port.Open();
-                AllowComControls();
-                //faire un fade ou un truc qui montre que c co
 
-                OutToRichLog("Com", "Opening " + port.PortName + "...");
-                isConnected = true;
-                OutToRichLog("HTTP", "Trying to read txt file.. ");
-                InitTimer();
+                
+                try
+                {
+                    port.Open();
+                    AllowComControls();
+                    //faire un fade ou un truc qui montre que c co
+                    // TODO passer la value connected à l'arduino
+                    OutToRichLog("Com", "Opening " + port.PortName + "...");
+                    isConnected = true;
+                    OutToRichLog("HTTP", "Trying to read txt file.. ");
+                    InitTimer();
+                }
+                catch (UnauthorizedAccessException unauth)
+                {
+                    OutToRichLog("Com", "Port is open somewhere else \n" + unauth );
+                }
+                
+             
             }
 
             text_iSconnected.Text = port.IsOpen.ToString();
