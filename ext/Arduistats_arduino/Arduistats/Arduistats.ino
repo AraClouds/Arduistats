@@ -4,7 +4,8 @@
 
 // Declare which fonts we will be using
 //extern uint8_t Roboto_Mono_Thin_65[];
-extern unsigned short zerovisit[4500];
+extern unsigned short tildezerov[6400];
+extern unsigned short finaldisco[6400];
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
@@ -46,6 +47,7 @@ void setup()
   myGLCD.setFont(BigFont);
   myGLCD.setBackColor(50, 50, 50);
   myGLCD.setColor(255, 255, 255);
+  DisconnectedBitmap();
   myGLCD.print("www.araclouds.com", CENTER, 220);
 }
 //
@@ -55,6 +57,7 @@ void portStatus(bool portstat){
   if (portstat == true) {
     myGLCD.setFont(SmallFont);
      myGLCD.setBackColor(0, 0, 0);
+      
     myGLCD.print("PORT CONNECTED TO        ", LEFT, 0);
   }
   else {
@@ -147,12 +150,14 @@ void loop()
     
     if (inString.toInt() == 0)
     {
-      myGLCD.setBackColor(50, 50, 50);
-      myGLCD.drawBitmap(82, 82, 90, 50, zerovisit);
+      CleanAreaScreen(); 
+      myGLCD.drawBitmap(120, 100, 80, 80, tildezerov);
      // myGLCD.print("***",LEFT,80);
     }
     else {
-       myGLCD.printNumI(inString.toInt(),LEFT,80);
+      CleanAreaScreen();
+      myGLCD.setColor(140, 0, 0); // set color of inString (visitors)
+      myGLCD.printNumI(inString.toInt(),CENTER,80);
     }
       // clear the string for new input:
        myGLCD.setBackColor(0, 0, 0);
@@ -169,4 +174,14 @@ void loop()
   }
   
 
+}
+
+void DisconnectedBitmap() {
+   myGLCD.drawBitmap(120, 100, 80, 80, finaldisco);
+}
+
+void CleanAreaScreen() { // just drawing some rectangles
+
+      myGLCD.setColor(50, 50, 50); // set color of clean bg
+      myGLCD.fillRect(30,60,280,190); // bg clean the three dots
 }
