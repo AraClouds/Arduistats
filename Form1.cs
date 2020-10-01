@@ -444,6 +444,7 @@ namespace Arduistats
         private void CloseAll()
         {
             port.Close();
+            //TODO Disconnected app on arduino (bitmap)
             Debug.WriteLine("CLOSINGCLOSINGCLOSINGCLOSINGCLOSING : ");
         }
 
