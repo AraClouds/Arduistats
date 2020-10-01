@@ -2,25 +2,20 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-/*
-Ecrire les sessions dans le txt
-*/
-$current_users_file = 'ct/users.txt';
+if (preg_match('/bot|crawl|curl|dataprovider|search|get|spider|find|java|majesticsEO|google|yahoo|teoma|contaxe|yandex|libwww-perl|facebookexternalhit/i', $_SERVER['HTTP_USER_AGENT'])) {
+    // is bot
+}
+else {
+	
+	$current_users_file = 'ct/users.txt';
 if (!file_exists($current_users_file)) fclose(fopen($current_users_file, "w"));
 $users = file($current_users_file);
 $found = false;
 $user_count = count($users);
 $fp = fopen($current_users_file, "w");
 $id = substr(session_id(), 0, -15);;
-//$trimedid = substr($id, 0, -10);
-/*
-if (session_status() == PHP_SESSION_ACTIVE) {
-  echo 'Session is active';
-}
-else {
-	echo 'no session';
-}
-*/
+
+
 foreach($users as $user) {
     $user = explode("|", $user);
     if ($user[1]+80 < time()) {
@@ -36,11 +31,12 @@ foreach($users as $user) {
 if (!$found) {
     fputs($fp, $id."| ".time()."\n");
     $user_count++;
+	//last user was written date("i:s") ago
+	
 }
+fputs($fp, "last=".date("Y,m,d,H,i,s"));
 fclose($fp);
+}
 
-$printtamere = 'Active users <b>' . $user_count . '</b>' ;
-
-   // echo "<script>console.debug( \"PHP DEBUG: $printtamere\" );</script>";
 ?>
 <div id="opki" style="display:none;"><?php echo $user_count; ?></div>
