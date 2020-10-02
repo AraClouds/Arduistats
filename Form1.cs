@@ -38,7 +38,7 @@ namespace Arduistats
         bool isHttpConnected;
         //Config
         public string userDomain = "";
-        const string url = "/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
+        public string txtloc = "/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
         int refresh = 5000;
         private bool advancedDebug;
         private double customUserHours = 0;
@@ -79,14 +79,16 @@ namespace Arduistats
 
         }
 
-        async static Task<string> GetTxt()
+        async  Task<string> GetTxt()
         {
+          //  string tamereee = userDomain;
             HttpClient client = new HttpClient();
-            string result = await client.GetStringAsync(url);
+            string result = await client.GetStringAsync(userDomain + txtloc);
             if (result != null)
             {
-             //   ishttpConnected = true;
-                
+                //   ishttpConnected = true;
+                OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
+
             }
 
             return result;
@@ -464,7 +466,7 @@ namespace Arduistats
 
         private void Inp_Domain_TextChanged(object sender, EventArgs e)
         {
-            userDomain = Inp_Domain.Text; // TODO STORE to local variable
+            userDomain = Inp_Domain.Text; 
         }
 
         private async void BtnVerifyUsrUrl_Click(object sender, EventArgs e)
@@ -472,24 +474,24 @@ namespace Arduistats
             
             if (Uri.IsWellFormedUriString(userDomain, UriKind.Absolute))
             {
-                OutToRichLog("SETUP", "Trying to connect...  " + userDomain + url);
+                OutToRichLog("SETUP", "Trying to connect...  " + userDomain + txtloc);
                 finalurl = userDomain + "/ct/users.txt";
 
                 try
                 {
                     HttpClient client = new HttpClient();
-                    string result = await client.GetStringAsync(userDomain + url);
+                    string result = await client.GetStringAsync(userDomain + txtloc);
                     if (result != null)
                     {
-                        OutToRichLog("SETUP", " Verified OK  " + userDomain + url);
-
+                        OutToRichLog("SETUP", " Verified OK  " + userDomain + txtloc);
+                        // TODO STORE to localstorage = url verified.
                     }
 
-                   
+
                 }
                 catch
                 {
-                    OutToRichLog("SETUP", "404 :  " + userDomain + url);
+                    OutToRichLog("SETUP", "404 :  " + userDomain + txtloc);
                 }
 
             }
