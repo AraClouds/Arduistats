@@ -37,11 +37,14 @@ namespace Arduistats
         string _storedUserOut;
         bool isHttpConnected;
         //Config
-        const string url = "https://www.araclouds.com/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
+        public string userDomain = "";
+        const string url = "/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
         int refresh = 5000;
         private bool advancedDebug;
         private double customUserHours = 0;
         private double secondstoadd = 0;
+        private string finalurl;
+
         //Config
 
         public MainWindow()
@@ -144,12 +147,8 @@ namespace Arduistats
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
                 Debug.WriteLine("lastWrittenUser : " + lastWrittenUser);
                 string[] splitString = lastWrittenUser.Split(',');
-             //   Debug.WriteLine("  " + splitString[0] + splitString[1] + splitString[2] + splitString[3] + splitString[4] + splitString[5]);
-               /* editHours = 2;
-                int receivedHour;
-                receivedHour = Int16.Parse(splitString[3]);
-                int veritableHour = receivedHour += editHours;*/
-                //la date d'édition du fichier nous donnera le timeout visiteur
+            
+                // la date d'édition du fichier nous donnera le timeout visiteur
                 // convertir les deux en secondes, soustraire l'actual time avec le lastwrittenUser et si var time > x secondes write 0 a arduino
                 DateTime a = new DateTime(
                     Int16.Parse(splitString[0]),
@@ -462,5 +461,40 @@ namespace Arduistats
             Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
             //Inpt_ActualServerTime.
         }
+
+        private void Inp_Domain_TextChanged(object sender, EventArgs e)
+        {
+            userDomain = Inp_Domain.Text; // TODO STORE to local variable
+        }
+
+        private async void BtnVerifyUsrUrl_Click(object sender, EventArgs e)
+        {
+            
+            if (Uri.IsWellFormedUriString(userDomain, UriKind.Absolute))
+            {
+                OutToRichLog("SETUP", "Trying to connect...  " + userDomain + url);
+                finalurl = userDomain + "/ct/users.txt";
+
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    string result = await client.GetStringAsync(userDomain + url);
+                    if (result != null)
+                    {
+                        OutToRichLog("SETUP", " Verified OK  " + userDomain + url);
+
+                    }
+
+                   
+                }
+                catch
+                {
+                    OutToRichLog("SETUP", "404 :  " + userDomain + url);
+                }
+
+            }
+        }
+
+
     }
 }
