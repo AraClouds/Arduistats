@@ -130,7 +130,7 @@ namespace Arduistats
         {
              try
             {
-
+                Debug.WriteLine("----------Timer1_Tick > TRY-----------");
                 string fetchedTxt = await GetTxt();
                 char ch = '|';
                 int freq = fetchedTxt.Count(f => (f == ch));

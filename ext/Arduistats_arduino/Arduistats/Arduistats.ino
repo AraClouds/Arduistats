@@ -6,6 +6,7 @@
 //extern uint8_t Roboto_Mono_Thin_65[];
 extern unsigned short tildezerov[6400];
 extern unsigned short finaldisco[6400];
+extern uint8_t Roboto64x96Num[];
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
 extern uint8_t SevenSegNumFont[];
@@ -156,7 +157,8 @@ void loop()
     }
     else {
       CleanAreaScreen();
-      myGLCD.setColor(140, 0, 0); // set color of inString (visitors)
+      myGLCD.setColor(230, 230, 230); // set color of inString (visitors)
+      myGLCD.setFont(Roboto64x96Num);
       myGLCD.printNumI(inString.toInt(),CENTER,80);
     }
       // clear the string for new input:
