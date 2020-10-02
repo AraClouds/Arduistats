@@ -15,12 +15,15 @@ using System.IO.Ports;
 using System.Management;
 using Hanssens.Net;
 using System.Net;
+using System.Configuration;
 
 
 // Todo refaire UI + ajouter un bouton expand controls
 // ui arduino + blink si new visit
 // TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user
 // TODO remplacer 0 par ... sur le display arduino
+
+// TODO Clean again and again the richlog
 
 
 namespace Arduistats
@@ -44,19 +47,24 @@ namespace Arduistats
         private double customUserHours = 0;
         private double secondstoadd = 0;
         private string finalurl;
-
+        //   private FormSettings frmSettings1 = new FormSettings();
         //Config
+        public static AppSettingsSection AppConfig { get; private set; } = null;
 
         public MainWindow()
         {
             InitializeComponent();
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
+            AppConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings;
+            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Arduistats.config");
             this.FormClosing += new FormClosingEventHandler(MainWindow_FormClosing);
-            // init storage
-            storage = new LocalStorage();
-            /*  var doc = webload.Load(url);*/
 
+            // init storage
+            Debug.WriteLine("-------DIRECTORY");
+            //Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            /*  var doc = webload.Load(url);*/
+            Debug.WriteLine("-------DIRECTORY");
         }
 
         private void InitBase()

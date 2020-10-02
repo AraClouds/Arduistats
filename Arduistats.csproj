@@ -13,14 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Analytics.v3" Version="1.49.0.1679" />
-    <PackageReference Include="Google.Apis.AnalyticsReporting.v4" Version="1.49.0.2091" />
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.49.0.2091" />
-    <PackageReference Include="GoogleAnalyticsTracker.Core" Version="6.0.5" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="LocalStorage" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
     <PackageReference Include="System.Management" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
