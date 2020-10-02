@@ -57,7 +57,7 @@ namespace Arduistats
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
             AppConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings;
-            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Arduistats.config");
+           // AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Arduistats.config");
             this.FormClosing += new FormClosingEventHandler(MainWindow_FormClosing);
 
             // init storage
@@ -462,6 +462,9 @@ namespace Arduistats
             Debug.WriteLine("CLOSINGCLOSINGCLOSINGCLOSINGCLOSING : ");
         }
 
+        /// <summary> Inp_NumericHours_ValueChanged
+        /// C'est juste matrixant
+        /// </summary>
         private void Inp_NumericHours_ValueChanged(object sender, EventArgs e)
         {
             var actualH = Inp_NumericHours.Text;
@@ -482,28 +485,51 @@ namespace Arduistats
             userDomain = Inp_Domain.Text; 
         }
 
+
+        /// <summary>
+        /// Au clic on corrige le format, on "try" la requête http, si la requête est différente de null (souvent 404, mauvais input / htaccess)
+        /// on vérifie si un domaine a déjà été enregistré, si oui on fait rien, si la variable est à "none" on l'enregistre
+        /// </summary>
         private async void BtnVerifyUsrUrl_Click(object sender, EventArgs e)
         {
             
             if (Uri.IsWellFormedUriString(userDomain, UriKind.Absolute))
             {
-                OutToRichLog("SETUP", "Trying to connect...  " + userDomain + txtloc);
-                finalurl = userDomain + "/ct/users.txt";
+                //corrige le format
+                var _domain = new Uri(userDomain);
+                var _domfinaloutput = new Uri(_domain, txtloc);
+                OutToRichLog("TEST", "Trying to connect...  \n" + _domfinaloutput);
 
                 try
                 {
                     HttpClient client = new HttpClient();
-                    string result = await client.GetStringAsync(userDomain + txtloc);
-                    string domainuser = userDomain + txtloc;
+                    string result = await client.GetStringAsync(_domfinaloutput);
                     if (result != null)
                     {
-                        Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-                        config.AppSettings.Settings.Add("userdomain", domainuser);
-                        config.Save(ConfigurationSaveMode.Minimal);
-                        var myValue = AppConfig.Settings["userdomain"].Value;
-                        OutToRichLog("SETUP", " Verified OK  " + domainuser);
-                        OutToRichLog("SETUP", " myValue AppConfig.Settings  " + myValue);
-                        // TODO STORE to localstorage = url verified.
+                        // on regarde si y'a déjà quelque chose d'enregistré
+                        var myDomain = AppConfig.Settings["userdomain"].Value;
+
+                        if (myDomain == "none") // value vierge, on enregistre le domaine
+                        {
+
+                            string _domValid = _domfinaloutput.ToString();
+
+                            Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                            config.AppSettings.Settings.Add("userdomain", _domValid);
+
+                            // save que si c'est différent de "none"
+                            //save que si l'url est véritablement vérifiée et fonctionnelle
+                            config.Save(ConfigurationSaveMode.Minimal);
+                            var myValue = AppConfig.Settings["userdomain"].Value;
+                            // OutToRichLog("SETUP", " Verified OK  " + domainuser);
+                            OutToRichLog("SETUP", " myValue AppConfig.Settings  " + myValue);
+                        }
+                        else
+                        {
+
+                        }
+
+
                     }
 
 
