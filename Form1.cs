@@ -62,7 +62,7 @@ namespace Arduistats
 
             // init storage
             Debug.WriteLine("-------DIRECTORY");
-            //Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            Debug.WriteLine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
             /*  var doc = webload.Load(url);*/
             Debug.WriteLine("-------DIRECTORY");
         }
