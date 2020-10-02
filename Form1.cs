@@ -65,6 +65,11 @@ namespace Arduistats
             Debug.WriteLine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
             /*  var doc = webload.Load(url);*/
             Debug.WriteLine("-------DIRECTORY");
+
+
+            var myValue = AppConfig.Settings["userdomain"].Value;
+            Debug.WriteLine(myValue);
+
         }
 
         private void InitBase()
@@ -489,9 +494,15 @@ namespace Arduistats
                 {
                     HttpClient client = new HttpClient();
                     string result = await client.GetStringAsync(userDomain + txtloc);
+                    string domainuser = userDomain + txtloc;
                     if (result != null)
                     {
-                        OutToRichLog("SETUP", " Verified OK  " + userDomain + txtloc);
+                        Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                        config.AppSettings.Settings.Add("userdomain", domainuser);
+                        config.Save(ConfigurationSaveMode.Minimal);
+                        var myValue = AppConfig.Settings["userdomain"].Value;
+                        OutToRichLog("SETUP", " Verified OK  " + domainuser);
+                        OutToRichLog("SETUP", " myValue AppConfig.Settings  " + myValue);
                         // TODO STORE to localstorage = url verified.
                     }
 
