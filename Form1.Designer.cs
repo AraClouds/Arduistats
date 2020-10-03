@@ -33,7 +33,6 @@
             this.PortInfos = new System.Windows.Forms.Button();
             this.btn_listenToArduino = new System.Windows.Forms.Button();
             this.RichLogBox = new System.Windows.Forms.RichTextBox();
-            this.btn_readShit = new System.Windows.Forms.Button();
             this.btn_startphpfetch = new System.Windows.Forms.Button();
             this.text_iSconnected = new System.Windows.Forms.TextBox();
             this.Btn_GetCurPortInfo = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.Inp_NumericHours = new System.Windows.Forms.NumericUpDown();
             this.BtnVerifyUsrUrl = new System.Windows.Forms.Button();
+            this.ClearDomain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,17 +109,6 @@
             this.RichLogBox.Size = new System.Drawing.Size(311, 254);
             this.RichLogBox.TabIndex = 4;
             this.RichLogBox.Text = "";
-            // 
-            // btn_readShit
-            // 
-            this.btn_readShit.Enabled = false;
-            this.btn_readShit.Location = new System.Drawing.Point(434, 455);
-            this.btn_readShit.Name = "btn_readShit";
-            this.btn_readShit.Size = new System.Drawing.Size(75, 23);
-            this.btn_readShit.TabIndex = 5;
-            this.btn_readShit.Text = "Readphpuser";
-            this.btn_readShit.UseVisualStyleBackColor = true;
-            this.btn_readShit.Click += new System.EventHandler(this.btn_readShit_Click);
             // 
             // btn_startphpfetch
             // 
@@ -310,11 +299,22 @@
             this.BtnVerifyUsrUrl.UseVisualStyleBackColor = true;
             this.BtnVerifyUsrUrl.Click += new System.EventHandler(this.BtnVerifyUsrUrl_Click);
             // 
+            // ClearDomain
+            // 
+            this.ClearDomain.Location = new System.Drawing.Point(653, 72);
+            this.ClearDomain.Name = "ClearDomain";
+            this.ClearDomain.Size = new System.Drawing.Size(75, 23);
+            this.ClearDomain.TabIndex = 25;
+            this.ClearDomain.Text = "clr";
+            this.ClearDomain.UseVisualStyleBackColor = true;
+            this.ClearDomain.Click += new System.EventHandler(this.ClearDomain_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 631);
+            this.ClientSize = new System.Drawing.Size(733, 631);
+            this.Controls.Add(this.ClearDomain);
             this.Controls.Add(this.BtnVerifyUsrUrl);
             this.Controls.Add(this.Inp_NumericHours);
             this.Controls.Add(this.comboBox2);
@@ -336,7 +336,6 @@
             this.Controls.Add(this.Btn_GetCurPortInfo);
             this.Controls.Add(this.text_iSconnected);
             this.Controls.Add(this.btn_startphpfetch);
-            this.Controls.Add(this.btn_readShit);
             this.Controls.Add(this.RichLogBox);
             this.Controls.Add(this.btn_listenToArduino);
             this.Controls.Add(this.PortInfos);
@@ -359,7 +358,6 @@
         private System.Windows.Forms.Button PortInfos;
         private System.Windows.Forms.Button btn_listenToArduino;
         private System.Windows.Forms.RichTextBox RichLogBox;
-        private System.Windows.Forms.Button btn_readShit;
         private System.Windows.Forms.Button btn_startphpfetch;
         private System.Windows.Forms.TextBox text_iSconnected;
         private System.Windows.Forms.Button Btn_GetCurPortInfo;
@@ -381,6 +379,7 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.NumericUpDown Inp_NumericHours;
         private System.Windows.Forms.Button BtnVerifyUsrUrl;
+        private System.Windows.Forms.Button ClearDomain;
     }
 }
 
