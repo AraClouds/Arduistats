@@ -84,7 +84,7 @@ namespace Arduistats
                 Console.WriteLine("Error writing app settings");
             }
         }
-        public static void ClearValue()
+        public static void ClearValue(string key)
         {
 
         }

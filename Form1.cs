@@ -318,10 +318,6 @@ namespace Arduistats
                 this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
                 RichLogBox.AppendText(line + "\r\n");
                 RichLogBox.ScrollToCaret();
-       //     outToRichLog(line);
-              //  Debug.WriteLine(line);
-
-           
         }
 
         private delegate void LineReceivedEvent(string line);
@@ -347,9 +343,6 @@ namespace Arduistats
             string selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
             GetCurrentPortInformation(selectedPort);
             var porttostring = port.IsOpen;
-            //ajouter port name et tout
-        //    OutToRichLog(porttostring.ToString());
-            
             OutToRichLog("Com", "Current port info : " + porttostring.ToString());
         }
         void OutToRichLog(string type, string output)
@@ -363,19 +356,6 @@ namespace Arduistats
                 RichLogBox.AppendText("@ " + output + "\r\n");
                 RichLogBox.ScrollToCaret();
 
-
-         /*       int line = 0;
-                foreach (string HTTP in myfiles)
-                {
-                    // Whatever method you want to choose a color, here
-                    // I'm just alternating between red and blue
-                    RichLogBox.SelectionColor =
-                        line % 2 == 0 ? Color.Red : Color.Blue;
-
-                    // AppendText is better than rtb.Text += ...
-                    RichLogBox.AppendText(HTTP + "\r\n");
-                    line++;
-                }*/
 
             }
             else if (type == "Com")
@@ -445,7 +425,7 @@ namespace Arduistats
             var actualH = Inp_NumericHours.Text;
             var todouble = Int16.Parse(actualH);
             secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
-            ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd);
+            ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd.ToString());
 
             OutToRichLog("TEST", "customUserHours " + secondstoadd);
             Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
