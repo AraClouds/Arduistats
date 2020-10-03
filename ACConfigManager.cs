@@ -43,7 +43,7 @@ namespace Arduistats
                 Debug.WriteLine("Error reading app settings");
             }
         }
-        public static string getSettings(string key)
+        public static string getValue(string key)
         {
             string result = "";
             try

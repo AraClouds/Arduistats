@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Management;
 
-
+// TODO Exclude my session
 // Todo refaire UI + ajouter un bouton expand controls
 // ui arduino + blink si new visit
 // TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user
@@ -57,7 +57,14 @@ namespace Arduistats
 
         private void DisableInputURLctrls()
         {
-            
+            string rawDomain = ACConfigManager.getValue("userdomain");
+          //  string trimmDomain = rawDomain;
+
+            Uri myUri = new Uri(rawDomain);
+            string trimmDomain = myUri.Host;  // host is "www.contoso.com"
+
+            Inp_Domain.Enabled = false;
+            Inp_Domain.Text = trimmDomain;
         }
 
         private void InitBase()
@@ -84,7 +91,7 @@ namespace Arduistats
         {
           //  string tamereee = userDomain;
             HttpClient client = new HttpClient();
-            string _domain = ACConfigManager.getSettings("userdomain");
+            string _domain = ACConfigManager.getValue("userdomain");
             string result = await client.GetStringAsync(_domain);
             if (result != null)
             {
@@ -463,6 +470,8 @@ namespace Arduistats
                         string _domValid = _domfinaloutput.ToString();
 
                         ACConfigManager.AddUpdateAppSettings("userdomain", _domValid);
+                        DisableInputURLctrls();
+                        OutToRichLog("HTTP", "everything is fine, saving domain...  \nYou can now starts the loop !" + _domfinaloutput);
                     }
 
 
