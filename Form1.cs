@@ -1,21 +1,12 @@
-﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Management;
-using Hanssens.Net;
-using System.Net;
-using System.Configuration;
 
 
 // Todo refaire UI + ajouter un bouton expand controls
@@ -35,14 +26,12 @@ namespace Arduistats
         public static object storage;
         string userout;
         string _storedUserOut;
-        bool isHttpConnected;
         //Config
         public string userDomain = "";
-        public string txtloc = "/ct/users.txt"; // var :: domainInput + "ct/users.txt"if (Uri.IsWellFormedUriString("https://www.google.com", UriKind.Absolute))
+        public string txtloc = "/ct/users.txt"; 
         int refresh = 5000;
         private bool advancedDebug;
         private double secondstoadd = 0;
-        //   private FormSettings frmSettings1 = new FormSettings();
         //Config
         
         public MainWindow()
@@ -50,21 +39,25 @@ namespace Arduistats
             InitializeComponent();
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
-           // tempSettings.AppSettings.Settings.Add("userdomain", "none");
-           // tempSettings.Save(ConfigurationSaveMode.Full, true);
-            // AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Arduistats.config");
+            InitData();
             this.FormClosing += new FormClosingEventHandler(MainWindow_FormClosing);
+            Debug.WriteLine(ACConfigManager.CheckIfValueExists());
 
-            // init storage
-            //Debug.WriteLine("-------DIRECTORY");
-            //Debug.WriteLine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
-            /*  var doc = webload.Load(url);*/
-            //Debug.WriteLine("-------DIRECTORY");
+        }
 
+        private void InitData()
+        {
 
-         //   var myValue = AppConfig.Settings["userdomain"].Value;
-         //   Debug.WriteLine(myValue);
-         //   OutToRichLog("Frame", myValue);
+            bool isDomainHere = ACConfigManager.CheckIfValueExists();
+            if (isDomainHere == true)
+            {
+                DisableInputURLctrls();
+            }
+        }
+
+        private void DisableInputURLctrls()
+        {
+            
         }
 
         private void InitBase()
@@ -91,7 +84,8 @@ namespace Arduistats
         {
           //  string tamereee = userDomain;
             HttpClient client = new HttpClient();
-            string result = await client.GetStringAsync(userDomain + txtloc);
+            string _domain = ACConfigManager.getSettings("userdomain");
+            string result = await client.GetStringAsync(_domain);
             if (result != null)
             {
                 //   ishttpConnected = true;
@@ -174,7 +168,9 @@ namespace Arduistats
                 string convert = variableSecs.ToString();
                 string secGap = convert.Split(',')[0].Trim();
                 Debug.WriteLine("SECGAPSECGAP" + secGap);
-                int isecGap = Int16.Parse(secGap);
+
+                int isecGap = Int32.Parse(secGap);
+
                 Debug.WriteLine(now.Subtract(a).TotalSeconds);
                 advancedDebug = true;
                 // mettre en variable option
@@ -195,14 +191,11 @@ namespace Arduistats
             catch (HttpRequestException ex)
             {
 
-               
                // timer1.Stop();
                 httpStatus.Text = "Not connected";
                 var httpmessage = ex.Message;
                 OutToRichLog("HTTP", httpmessage.ToString());
 
-                
-                isHttpConnected = false;
             }
         }
 
@@ -224,8 +217,6 @@ namespace Arduistats
                     Debug.WriteLine(status);
                     Debug.WriteLine(desc);
                     Debug.WriteLine(portInfo);
-                    //Thats all information i got from port.
-                    //Do whatever you want with this information
                 }
             }
             return string.Empty;
@@ -443,7 +434,7 @@ namespace Arduistats
         {
             port.Close();
             //TODO Disconnected app on arduino (bitmap)
-            Debug.WriteLine("CLOSINGCLOSINGCLOSINGCLOSINGCLOSING : ");
+            Debug.WriteLine(" CLOSING ALL ");
         }
 
         /// <summary> Inp_NumericHours_ValueChanged
@@ -453,15 +444,11 @@ namespace Arduistats
         {
             var actualH = Inp_NumericHours.Text;
             var todouble = Int16.Parse(actualH);
-            // customUserHours = Inpt_ActualServerTime.Text;
-            //    TimeSpan timespan = TimeSpan.FromHours(todouble);
             secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
-            //  secondstoadd = timespan;
-
+            ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd);
 
             OutToRichLog("TEST", "customUserHours " + secondstoadd);
             Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
-            //Inpt_ActualServerTime.
         }
 
         private void Inp_Domain_TextChanged(object sender, EventArgs e)
@@ -476,9 +463,9 @@ namespace Arduistats
         /// </summary>
         private async void BtnVerifyUsrUrl_Click(object sender, EventArgs e)
         {
-            ACConfigManager ConfigManage = new ACConfigManager();
-
-            ConfigManage.
+          
+            
+           
             if (Uri.IsWellFormedUriString(userDomain, UriKind.Absolute))
             {
                 //corrige le format
@@ -493,32 +480,9 @@ namespace Arduistats
                     if (result != null)
                     {
                         // on regarde si y'a déjà quelque chose d'enregistré
-                        
+                        string _domValid = _domfinaloutput.ToString();
 
-                        if (myDomain == "none") // value vierge, on enregistre le domaine
-                        {
-
-                            string _domValid = _domfinaloutput.ToString();
-                            // on supprime la value de userdomain
-                            
-                       
-
-                            // save que si c'est différent de "none"
-                            //save que si l'url est véritablement vérifiée et fonctionnelle
-                    
-                        //    var myValuee = AppSettings.Settings["userdomain"].Value;
-                            // OutToRichLog("SETUP", " Verified OK  " + domainuser);
-                            OutToRichLog("SETUP", "Registered : ");
-                        }
-                        else
-                        {
-                            Inp_Domain.ReadOnly = true;
-                            // lock input
-                            // display control for remove current domain
-                         //   Debug.WriteLine(myValue);
-                        }
-
-
+                        ACConfigManager.AddUpdateAppSettings("userdomain", _domValid);
                     }
 
 
@@ -533,12 +497,7 @@ namespace Arduistats
 
         private void ClearDomain_Click(object sender, EventArgs e)
         {
-           
-
-      //      tempSettings.AppSettings.Settings.Remove("userdomain");
-            
-      //     tempSettings.Save(ConfigurationSaveMode.Minimal);
-           
+          //  ACConfigManager.ClearValue();
         }
     }
 }

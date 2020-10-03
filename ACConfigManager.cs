@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Text;
+using System.Diagnostics;
 
 namespace Arduistats
 {
@@ -37,12 +36,27 @@ namespace Arduistats
             {
                 var appSettings = ConfigurationManager.AppSettings;
                 string result = appSettings[key] ?? "Not Found";
-                Console.WriteLine(result);
+                Debug.WriteLine("ReadSetting() try ok : " + result);
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error reading app settings");
+                Debug.WriteLine("Error reading app settings");
             }
+        }
+        public static string getSettings(string key)
+        {
+            string result = "";
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                result = appSettings[key] ?? "Not Found";
+                Debug.WriteLine("ReadSetting() try ok : " + result);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Debug.WriteLine("Error reading app settings");
+            }
+            return result;
         }
 
         public static void AddUpdateAppSettings(string key, string value)
@@ -54,18 +68,53 @@ namespace Arduistats
                 if (settings[key] == null)
                 {
                     settings.Add(key, value);
+                    Debug.WriteLine("Wrote Added");
                 }
                 else
                 {
                     settings[key].Value = value;
+                    Debug.WriteLine("Wrote Updated ?");
                 }
                 configFile.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+                
             }
             catch (ConfigurationErrorsException)
             {
                 Console.WriteLine("Error writing app settings");
             }
         }
+        public static void ClearValue()
+        {
+
+        }
+        public static bool CheckIfValueExists()
+        {
+            bool domainExists = false;
+            
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                string result = appSettings["userdomain"] ?? "Not Found";
+                if (result != "none")
+                    {
+                        domainExists = true;
+                        Debug.WriteLine("DomainExists()  : " + result);
+                    }
+                   // Debug.WriteLine("ReadSetting() try ok : " + result);
+                else
+                {
+                    domainExists = false;
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Debug.WriteLine("Error reading app settings");
+            }
+            
+            return domainExists;
+        }
+
+
     }
 }
