@@ -50,6 +50,7 @@ namespace Arduistats
         public MainWindow()
         {
             InitializeComponent();
+            (new Arduistats.DropShadow()).ApplyShadows(this);
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
             InitData();
@@ -66,7 +67,10 @@ namespace Arduistats
             {
 
                 string _serverTime = ACConfigManager.getValue("servertime");
-
+                //_servertime > convert hours > covert decimal
+               // Inp_NumericHours.Value = _serverTime;
+                string _consideroff = ACConfigManager.getValue("consideroff");
+                string _timertick = ACConfigManager.getValue("timertick");
                 OutToRichLog("HTTP", "Get Config servertime : " + _serverTime);
                 DisableInputURLctrls();
             }
