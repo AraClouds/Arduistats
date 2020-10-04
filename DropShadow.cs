@@ -22,7 +22,7 @@ namespace Arduistats
         private const int HTCLIENT = 0x1;
         private const int HTCAPTION = 0x2;
         private const int CS_DBLCLKS = 0x8;
-        private const int CS_DROPSHADOW = 0x00020000;
+        private const int CS_DROPSHADOW = 0x00010000;
         private const int WM_NCPAINT = 0x0085;
         private const int WM_ACTIVATEAPP = 0x001C;
 

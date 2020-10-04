@@ -94,7 +94,7 @@
             // 
             this.btn_listenToArduino.Enabled = false;
             this.btn_listenToArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_listenToArduino.Location = new System.Drawing.Point(434, 289);
+            this.btn_listenToArduino.Location = new System.Drawing.Point(521, 289);
             this.btn_listenToArduino.Name = "btn_listenToArduino";
             this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
             this.btn_listenToArduino.TabIndex = 3;
@@ -139,9 +139,9 @@
             this.Btn_GetCurPortInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(353, 289);
             this.Btn_GetCurPortInfo.Name = "Btn_GetCurPortInfo";
-            this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(75, 23);
+            this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(116, 23);
             this.Btn_GetCurPortInfo.TabIndex = 8;
-            this.Btn_GetCurPortInfo.Text = "COM Info";
+            this.Btn_GetCurPortInfo.Text = "Cur port Info";
             this.Btn_GetCurPortInfo.UseVisualStyleBackColor = true;
             this.Btn_GetCurPortInfo.Click += new System.EventHandler(this.Btn_GetCurPortInfo_Click);
             // 

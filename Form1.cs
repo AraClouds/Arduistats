@@ -35,7 +35,7 @@ namespace Arduistats
         private double secondstoadd = 0;
         //Config
 
-
+        // Drag title bar hack
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -46,7 +46,8 @@ namespace Arduistats
         public static extern bool ReleaseCapture();
 
 
-
+        DropShadow shadow = new DropShadow();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -65,15 +66,27 @@ namespace Arduistats
             bool isDomainHere = ACConfigManager.CheckIfValueExists();
             if (isDomainHere == true)
             {
-
+                btn_serielConnect.Enabled = true;
                 string _serverTime = ACConfigManager.getValue("servertime");
+                int servtimeInt = Int16.Parse(_serverTime);
+                int hours = servtimeInt / 3600;
+                Inp_NumericHours.Value = hours;
                 //_servertime > convert hours > covert decimal
-               // Inp_NumericHours.Value = _serverTime;
+                // Inp_NumericHours.Value = _serverTime;
                 string _consideroff = ACConfigManager.getValue("consideroff");
                 string _timertick = ACConfigManager.getValue("timertick");
                 OutToRichLog("HTTP", "Get Config servertime : " + _serverTime);
                 DisableInputURLctrls();
             }
+            else
+            {
+                DisableConnection();
+            }
+        }
+
+        private void DisableConnection()
+        {
+            btn_serielConnect.Enabled = false;
         }
 
         private void DisableInputURLctrls()
@@ -96,6 +109,12 @@ namespace Arduistats
             //afficher les ports
             OutToRichLog("Com", "Ports found : ");
             GetPortInformation();
+            // TODO not working
+            if (btn_serielConnect.Enabled == false)
+            {
+                btn_serielConnect.ForeColor = Color.FromArgb(100,100,100);
+            }
+
             foreach (string port in ports)
             {
                 comboBox1.Items.Add(port);
