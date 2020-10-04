@@ -52,20 +52,26 @@
             this.ClearDomain = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.TitleBar = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).BeginInit();
+            this.TitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 86);
+            this.comboBox1.Location = new System.Drawing.Point(13, 116);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);
             this.comboBox1.TabIndex = 0;
             // 
             // btn_serielConnect
             // 
-            this.btn_serielConnect.Location = new System.Drawing.Point(140, 86);
+            this.btn_serielConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_serielConnect.Location = new System.Drawing.Point(140, 115);
             this.btn_serielConnect.Name = "btn_serielConnect";
             this.btn_serielConnect.Size = new System.Drawing.Size(108, 23);
             this.btn_serielConnect.TabIndex = 1;
@@ -75,6 +81,7 @@
             // 
             // PortInfos
             // 
+            this.PortInfos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PortInfos.Location = new System.Drawing.Point(353, 318);
             this.PortInfos.Name = "PortInfos";
             this.PortInfos.Size = new System.Drawing.Size(75, 23);
@@ -86,6 +93,7 @@
             // btn_listenToArduino
             // 
             this.btn_listenToArduino.Enabled = false;
+            this.btn_listenToArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_listenToArduino.Location = new System.Drawing.Point(434, 289);
             this.btn_listenToArduino.Name = "btn_listenToArduino";
             this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
@@ -109,6 +117,7 @@
             // 
             // btn_startphpfetch
             // 
+            this.btn_startphpfetch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_startphpfetch.Location = new System.Drawing.Point(434, 318);
             this.btn_startphpfetch.Name = "btn_startphpfetch";
             this.btn_startphpfetch.Size = new System.Drawing.Size(75, 23);
@@ -119,7 +128,7 @@
             // 
             // text_iSconnected
             // 
-            this.text_iSconnected.Location = new System.Drawing.Point(254, 86);
+            this.text_iSconnected.Location = new System.Drawing.Point(253, 115);
             this.text_iSconnected.Name = "text_iSconnected";
             this.text_iSconnected.Size = new System.Drawing.Size(70, 23);
             this.text_iSconnected.TabIndex = 7;
@@ -127,6 +136,7 @@
             // Btn_GetCurPortInfo
             // 
             this.Btn_GetCurPortInfo.Enabled = false;
+            this.Btn_GetCurPortInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(353, 289);
             this.Btn_GetCurPortInfo.Name = "Btn_GetCurPortInfo";
             this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(75, 23);
@@ -173,6 +183,7 @@
             // 
             // comboBox_httpTickRate
             // 
+            this.comboBox_httpTickRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox_httpTickRate.FormattingEnabled = true;
             this.comboBox_httpTickRate.Location = new System.Drawing.Point(353, 144);
             this.comboBox_httpTickRate.Name = "comboBox_httpTickRate";
@@ -244,6 +255,7 @@
             // 
             // BtnVerifyUsrUrl
             // 
+            this.BtnVerifyUsrUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnVerifyUsrUrl.Location = new System.Drawing.Point(353, 115);
             this.BtnVerifyUsrUrl.Name = "BtnVerifyUsrUrl";
             this.BtnVerifyUsrUrl.Size = new System.Drawing.Size(170, 23);
@@ -254,6 +266,7 @@
             // 
             // ClearDomain
             // 
+            this.ClearDomain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ClearDomain.Location = new System.Drawing.Point(529, 115);
             this.ClearDomain.Name = "ClearDomain";
             this.ClearDomain.Size = new System.Drawing.Size(67, 23);
@@ -273,9 +286,10 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.BackColor = System.Drawing.Color.MediumOrchid;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(591, 12);
+            this.button1.Location = new System.Drawing.Point(603, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(25, 25);
             this.button1.TabIndex = 26;
@@ -283,12 +297,25 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // TitleBar
+            // 
+            this.TitleBar.BackColor = System.Drawing.Color.Indigo;
+            this.TitleBar.Controls.Add(this.button1);
+            this.TitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TitleBar.Location = new System.Drawing.Point(0, 0);
+            this.TitleBar.Name = "TitleBar";
+            this.TitleBar.Size = new System.Drawing.Size(628, 25);
+            this.TitleBar.TabIndex = 27;
+            this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(628, 558);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.TitleBar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ClearDomain);
             this.Controls.Add(this.BtnVerifyUsrUrl);
@@ -310,13 +337,13 @@
             this.Controls.Add(this.btn_listenToArduino);
             this.Controls.Add(this.PortInfos);
             this.Controls.Add(this.btn_serielConnect);
-            this.Controls.Add(this.comboBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Arduistats";
             ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).EndInit();
+            this.TitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,6 +374,7 @@
         private System.Windows.Forms.Button ClearDomain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel TitleBar;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Management;
+using System.Runtime.InteropServices;
 
 // TODO Exclude my session
 // Todo refaire UI + ajouter un bouton expand controls
@@ -33,7 +34,19 @@ namespace Arduistats
         private bool advancedDebug;
         private double secondstoadd = 0;
         //Config
-        
+
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+                         int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,6 +64,10 @@ namespace Arduistats
             bool isDomainHere = ACConfigManager.CheckIfValueExists();
             if (isDomainHere == true)
             {
+
+                string _serverTime = ACConfigManager.getValue("servertime");
+
+                OutToRichLog("HTTP", "Get Config servertime : " + _serverTime);
                 DisableInputURLctrls();
             }
         }
@@ -99,9 +116,7 @@ namespace Arduistats
                 OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
 
             }
-
             return result;
-   
         }
 
         public void InitTimer()
@@ -189,8 +204,7 @@ namespace Arduistats
 
                 } else
                 {
-                    CheckDifferentCounting(userout, _storedUserOut);
-                  
+                    CheckDifferentCounting(userout, _storedUserOut);  
                 }
               //  port.WriteLine(secGap);
                 Debug.WriteLine("FINAL GAP : " + secGap + "\n");
@@ -206,7 +220,6 @@ namespace Arduistats
             }
         }
 
-
         public string GetCurrentPortInformation(string selectedport)
         {
             ManagementClass processClass = new ManagementClass("Win32_PnPEntity");
@@ -217,7 +230,6 @@ namespace Arduistats
                 var desc = property.GetPropertyValue("Description");
                 var status = property.GetPropertyValue("Status");
                
-
                 if (name != null && name.ToString().Contains(selectedport))
                 {
                     var portInfo = new SerialPortInfo(property);
@@ -228,7 +240,6 @@ namespace Arduistats
             }
             return string.Empty;
         }
-
 
         public string GetPortInformation()
         {
@@ -255,8 +266,6 @@ namespace Arduistats
             port.DtrEnable = true;
             port.RtsEnable = true;
             text_iSconnected.Text = isConnected.ToString();
-
-
             text_iSconnected.Text = port.IsOpen.ToString();
 
             if (port.IsOpen == true) {
@@ -287,12 +296,9 @@ namespace Arduistats
                 {
                     OutToRichLog("Com", "Port is open somewhere else \n" + unauth );
                 }
-                
-             
             }
 
             text_iSconnected.Text = port.IsOpen.ToString();
-
         }
 
         private void AllowComControls()
@@ -317,10 +323,8 @@ namespace Arduistats
             port.DataReceived += SerialPort1_DataReceived;
         }
 
-
         private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-      
                 string line = port.ReadLine();
                 this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
                 RichLogBox.AppendText(line + "\r\n");
@@ -334,7 +338,6 @@ namespace Arduistats
             //What to do with the received line here
             Debug.WriteLine("test + line : " + line);
             OutToRichLog("Com", "Received from " + port.PortName + line);
-
         }
 
 
@@ -354,16 +357,12 @@ namespace Arduistats
         }
         void OutToRichLog(string type, string output)
         {
-
-
             if (type == "HTTP")
             {
                // string myfiles = Rich
                 RichLogBox.ForeColor = System.Drawing.Color.LightGreen;
                 RichLogBox.AppendText("@ " + output + "\r\n");
                 RichLogBox.ScrollToCaret();
-
-
             }
             else if (type == "Com")
             {
@@ -376,11 +375,9 @@ namespace Arduistats
                 RichLogBox.AppendText(output + "\r\n");
                 RichLogBox.ScrollToCaret();
             }
-           
         }
 
         // TODO ColorTextBoxeSelection()
-
         private void ColorTextBoxeSelection(RichTextBox textBox, string s, Color textColor, Color backColor)
         {
             int start = 0, current = 0;
@@ -406,22 +403,18 @@ namespace Arduistats
 
         }
 
-
-
-      
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             /* e.Cancel = MessageBox.Show("Are you sure you want to really exit ? ",
                         "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No;*/
             CloseAll();
-
         }
 
         private void CloseAll()
         {
-            port.Close();
-            //TODO Disconnected app on arduino (bitmap)
-            Debug.WriteLine(" CLOSING ALL ");
+         //TODO Disconnected app on arduino (bitmap)
+         //  Debug.WriteLine(port.IsOpen);
+       //  port.
         }
 
         /// <summary> Inp_NumericHours_ValueChanged
@@ -450,9 +443,6 @@ namespace Arduistats
         /// </summary>
         private async void BtnVerifyUsrUrl_Click(object sender, EventArgs e)
         {
-          
-            
-           
             if (Uri.IsWellFormedUriString(userDomain, UriKind.Absolute))
             {
                 //corrige le format
@@ -473,8 +463,6 @@ namespace Arduistats
                         DisableInputURLctrls();
                         OutToRichLog("HTTP", "everything is fine, saving domain...  \nYou can now starts the loop !" + _domfinaloutput);
                     }
-
-
                 }
                 catch
                 {
@@ -492,7 +480,16 @@ namespace Arduistats
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+          //  Environment.Exit();
         }
-
+        //Capture event (sours) de la title bar
+        private void TitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
     }
 }
