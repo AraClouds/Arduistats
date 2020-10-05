@@ -55,6 +55,8 @@ namespace Arduistats
             OutToRichLog("Frame", "Starting engine...");
             InitBase();
             InitData();
+            LockButton(LaBouleMagique);
+
             this.FormClosing += new FormClosingEventHandler(MainWindow_FormClosing);
             Debug.WriteLine(ACConfigManager.CheckIfValueExists());
 
@@ -66,6 +68,7 @@ namespace Arduistats
             bool isDomainHere = ACConfigManager.CheckIfValueExists();
             if (isDomainHere == true)
             {
+                UnlockButton(LaBouleMagique);
                 btn_serielConnect.Enabled = true;
                 string _serverTime = ACConfigManager.getValue("servertime");
                 int servtimeInt = Int16.Parse(_serverTime);
@@ -80,9 +83,11 @@ namespace Arduistats
             }
             else
             {
-                DisableConnection();
+                //DisableConnection();
             }
         }
+
+
 
         private void DisableConnection()
         {
@@ -110,18 +115,15 @@ namespace Arduistats
             OutToRichLog("Com", "Ports found : ");
             GetPortInformation();
             // TODO not working
-            if (btn_serielConnect.Enabled == false)
-            {
-                btn_serielConnect.ForeColor = Color.FromArgb(100,100,100);
-            }
+ 
 
             foreach (string port in ports)
             {
-                comboBox1.Items.Add(port);
+                listPort.Items.Add(port);
                 
                 if (ports[0] != null)
                 {
-                    comboBox1.SelectedItem = ports[0];
+                    listPort.SelectedItem = ports[0];
                 }
             }
 
@@ -283,27 +285,44 @@ namespace Arduistats
         }
         private void Btn_serielConnect_Click(object sender, EventArgs e)
         {
+    
             // TODO IMPORTANT : trouver un moyen de disconnect proprement
-            selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
+            // selectedPort = listPort.GetItemText(listPort.SelectedItem);
             port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
-            port.DtrEnable = true;
-            port.RtsEnable = true;
+
+
+
+
+            //port.DtrEnable = true;
+          //  port.RtsEnable = true;
             text_iSconnected.Text = isConnected.ToString();
             text_iSconnected.Text = port.IsOpen.ToString();
 
-            if (port.IsOpen == true) {
+            if (isConnected == true) 
+            {
 
-                port.Close();
+                try
+                {
+                    port.DtrEnable = false;
+                    port.RtsEnable = false;
+                    port.DiscardInBuffer();
+                    port.DiscardOutBuffer();
+                    port.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
                 // passer la value disconneced à l'arduino
-             
+
                 isConnected = false;
                 OutToRichLog("Com","Closing " + port.PortName);
 
             }
-            else if (port.IsOpen == false) {
+            else if (isConnected == false) 
+            {
                 btn_serielConnect.Text = "Disconnect";
-
-                
                 try
                 {
                     port.Open();
@@ -312,8 +331,8 @@ namespace Arduistats
                     // TODO passer la value connected à l'arduino
                     OutToRichLog("Com", "Opening " + port.PortName + "...");
                     isConnected = true;
-                    OutToRichLog("HTTP", "Trying to read txt file.. ");
-                    InitTimer();
+                //    OutToRichLog("HTTP", "Trying to read txt file.. ");
+                    
                 }
                 catch (UnauthorizedAccessException unauth)
                 {
@@ -334,7 +353,7 @@ namespace Arduistats
 
         private void PortInfos_Click(object sender, EventArgs e)
         {
-            string selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
+            string selectedPort = listPort.GetItemText(listPort.SelectedItem);
             GetCurrentPortInformation(selectedPort);
            // string a = port.ReadExisting();
           //  Debug.WriteLine(a);
@@ -373,7 +392,7 @@ namespace Arduistats
         private void Btn_GetCurPortInfo_Click(object sender, EventArgs e)
         {
             //test
-            string selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
+            string selectedPort = listPort.GetItemText(listPort.SelectedItem);
             GetCurrentPortInformation(selectedPort);
             var porttostring = port.IsOpen;
             OutToRichLog("Com", "Current port info : " + porttostring.ToString());
@@ -513,6 +532,30 @@ namespace Arduistats
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+        }
+
+        private void Input_UserTimeout_TextChanged(object sender, EventArgs e)
+        {
+            string xxx = Input_UserTimeout.Text.ToString();
+            Debug.WriteLine("" + xxx);
+            ACConfigManager.AddUpdateAppSettings("consideroff", xxx);
+        }
+        private void LockButton(Button button)
+        {
+            button.BackColor = Color.Red;
+        }
+        private void UnlockButton(Button button)
+        {
+            button.BackColor = Color.Green;
+        }
+        private void LaBouleMagique_Click(object sender, EventArgs e)
+        {
+            InitTimer();
+        }
+
+        private void listPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedPort = listPort.GetItemText(listPort.SelectedItem);
         }
     }
 }
