@@ -290,11 +290,12 @@ namespace Arduistats
             // selectedPort = listPort.GetItemText(listPort.SelectedItem);
             port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
 
-
+            port.ReadTimeout = 500;
+            port.WriteTimeout = 500;
 
 
             //port.DtrEnable = true;
-          //  port.RtsEnable = true;
+            //  port.RtsEnable = true;
             text_iSconnected.Text = isConnected.ToString();
             text_iSconnected.Text = port.IsOpen.ToString();
 
@@ -504,6 +505,7 @@ namespace Arduistats
                         ACConfigManager.AddUpdateAppSettings("userdomain", _domValid);
                         DisableInputURLctrls();
                         OutToRichLog("HTTP", "everything is fine, saving domain...  \nYou can now starts the loop !" + _domfinaloutput);
+                        UnlockButton(LaBouleMagique);
                     }
                 }
                 catch
@@ -543,10 +545,12 @@ namespace Arduistats
         private void LockButton(Button button)
         {
             button.BackColor = Color.Red;
+            button.Enabled = false;
         }
         private void UnlockButton(Button button)
         {
             button.BackColor = Color.Green;
+            button.Enabled = true;
         }
         private void LaBouleMagique_Click(object sender, EventArgs e)
         {
