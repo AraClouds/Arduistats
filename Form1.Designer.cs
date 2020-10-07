@@ -56,6 +56,8 @@
             this.Arduistats = new System.Windows.Forms.Label();
             this.LaBouleMagique = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).BeginInit();
             this.TitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -353,12 +355,30 @@
             this.label7.TabIndex = 29;
             this.label7.Text = "2";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(353, 233);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(33, 23);
+            this.textBox1.TabIndex = 30;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(521, 414);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(605, 453);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.LaBouleMagique);
             this.Controls.Add(this.listPort);
@@ -426,6 +446,8 @@
         private System.Windows.Forms.Label Arduistats;
         private System.Windows.Forms.Button LaBouleMagique;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

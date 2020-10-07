@@ -9,12 +9,14 @@ using System.IO.Ports;
 using System.Management;
 using System.Runtime.InteropServices;
 
-// TODO Exclude my session
-// Todo refaire UI + ajouter un bouton expand controls
-// ui arduino + blink si new visit
-// TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user
-// TODO Clean again and again the richlog
-
+//    TODO Exclude my session
+// 3. TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user 
+//    TODO send connect & disconnect trigger to arduino
+//    TODO Clean again and again the richlog
+// 1. TODO Changer le inputUpDown de server time into inputbox
+// 2. TODO Délai du start into OutToRichBox / changer texte en connecting...
+//    TODO API Wordpress
+//    TODO actual page visited
 namespace Arduistats
 {
     public partial class MainWindow : Form
@@ -293,7 +295,8 @@ namespace Arduistats
             port.ReadTimeout = 500;
             port.WriteTimeout = 500;
 
-
+            port.DtrEnable = true;
+            port.RtsEnable = true;
             //port.DtrEnable = true;
             //  port.RtsEnable = true;
             text_iSconnected.Text = isConnected.ToString();
@@ -328,6 +331,7 @@ namespace Arduistats
                 {
                     port.Open();
                     AllowComControls();
+                    UnlockButton(LaBouleMagique);
                     //faire un fade ou un truc qui montre que c co
                     // TODO passer la value connected à l'arduino
                     OutToRichLog("Com", "Opening " + port.PortName + "...");
@@ -560,6 +564,10 @@ namespace Arduistats
         private void listPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedPort = listPort.GetItemText(listPort.SelectedItem);
+        }
+        private void SendSerialEndToArduino
+        {
+
         }
     }
 }
