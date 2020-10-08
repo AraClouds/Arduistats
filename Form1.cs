@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 
 //    TODO Exclude my session
 // 3. TODO parse plusieurs varaibles dans le arduino > live visit + elapsed time since user 
-//    TODO send connect & disconnect trigger to arduino
+//    TODONE (partial) send connect & disconnect trigger to arduino
 //    TODO Clean again and again the richlog
-// 1. TODO Changer le inputUpDown de server time into inputbox
+// 1. TODONE Changer le inputUpDown de server time into inputbox
 // 2. TODO Délai du start into OutToRichBox / changer texte en connecting...
 //    TODO API Wordpress
 //    TODO actual page visited
@@ -140,7 +140,7 @@ namespace Arduistats
             if (result != null)
             {
                 //   ishttpConnected = true;
-                OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
+               // OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
 
             }
             return result;
@@ -152,7 +152,15 @@ namespace Arduistats
             timer1.Tick += new EventHandler(Timer1_Tick);
             timer1.Interval = refresh; // in miliseconds
             timer1.Start();
+            DisplayOnlyOnce("started");
+            
             // TODO send is connected write toa rduino
+        }
+
+        private void DisplayOnlyOnce(string v)
+        {
+            OutToRichLog("HTTP", "Timer " + v);
+
         }
 
         // CheckDifferentCounting : si la variable reçue du txt est la même que la précédente, ne rien faire.
@@ -335,7 +343,12 @@ namespace Arduistats
                 {
                     port.Open();
                     AllowComControls();
-                    UnlockButton(LaBouleMagique);
+                    string isThereADomain = ACConfigManager.getValue("userdomain");
+                    if (isThereADomain != "none")
+                    {
+                        UnlockButton(LaBouleMagique);
+                    }
+                    
                     //faire un fade ou un truc qui montre que c co
                     // TODO passer la value connected à l'arduino
                     OutToRichLog("Com", "Opening " + port.PortName + "...");
@@ -463,9 +476,10 @@ namespace Arduistats
 
         private void CloseAll()
         {
-         //TODO Disconnected app on arduino (bitmap)
-         //  Debug.WriteLine(port.IsOpen);
-       //  port.
+            //TODO Disconnected app on arduino (bitmap)
+            //  Debug.WriteLine(port.IsOpen);
+            //  port.
+            SendSerialEndToArduino();
         }
 
         /// <summary> Inp_NumericHours_ValueChanged
@@ -562,7 +576,9 @@ namespace Arduistats
         }
         private void LaBouleMagique_Click(object sender, EventArgs e)
         {
+            OutToRichLog("HTTP", "Starting, please wait...");
             InitTimer();
+            
         }
 
         private void listPort_SelectedIndexChanged(object sender, EventArgs e)

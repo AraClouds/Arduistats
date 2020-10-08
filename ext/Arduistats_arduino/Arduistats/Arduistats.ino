@@ -145,9 +145,15 @@ myGLCD.print(inChar, CENTER, 187);
     if (inChar == '\n') {
 
 if (inString == "007") {
-myGLCD.clrScr();
-inString = "";
+      Serial.end();
+      portStatus(true);
+      CleanAreaScreen();
+      DisconnectedBitmap();
+    //myGLCD.clrScr();
+    inString = "";
 }
+else {
+
       myGLCD.setColor(140, 0, 0);
    //   myGLCD.printNumI(888,CENTER,120);
         myGLCD.setBackColor(0, 0, 0);
@@ -188,6 +194,9 @@ inString = "";
     }
     portStatus(false);
   httpStatus(false);
+  
+}
+
   }
   
 
