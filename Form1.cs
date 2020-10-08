@@ -482,19 +482,6 @@ namespace Arduistats
             SendSerialEndToArduino();
         }
 
-        /// <summary> Inp_NumericHours_ValueChanged
-        /// C'est juste matrixant
-        /// </summary>
-        private void Inp_NumericHours_ValueChanged(object sender, EventArgs e)
-        {
-          /*  var actualH = Inp_NumericHours.Text;
-            var todouble = Int16.Parse(actualH);
-            secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
-            ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd.ToString());
-
-            OutToRichLog("TEST", "customUserHours " + secondstoadd);
-            Debug.WriteLine("timespantimespantimespan: " + secondstoadd);*/
-        }
 
         private void Inp_Domain_TextChanged(object sender, EventArgs e)
         {
@@ -595,6 +582,9 @@ namespace Arduistats
         {
             SendSerialEndToArduino();
         }
+        /// <summary> Inp_NumericHours_ValueChanged
+        /// C'est juste matrixant
+        /// </summary>
 
         private void InputServerTime_TextChanged(object sender, EventArgs e)
         {

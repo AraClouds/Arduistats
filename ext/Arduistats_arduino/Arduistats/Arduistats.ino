@@ -33,18 +33,18 @@ void setup()
 {
   Serial.begin(9600);
   Serial.write("ALL ABOUT CIRCUITS!");//Send "ALL ABOUT CIRCUITS!" to the PC
-    pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   myGLCD.InitLCD();
   myGLCD.clrScr();
-    portStatus(false);
+  portStatus(false);
   httpStatus(false);
   sinceLastvisit("15S AGO");
   //Middle rectangle
   myGLCD.setColor(50, 50, 50);
   myGLCD.fillRect(0,50,319,400);
   //Bottom rectangle website
-//  myGLCD.setColor(255, 0, 0);
-//  myGLCD.fillRect(0,210,319,400);
+  //  myGLCD.setColor(255, 0, 0);
+  //  myGLCD.fillRect(0,210,319,400);
   //bottom website name
   myGLCD.setFont(BigFont);
   myGLCD.setBackColor(50, 50, 50);
@@ -58,8 +58,8 @@ void portStatus(bool portstat){
 
   if (portstat == true) {
     myGLCD.setFont(SmallFont);
-     myGLCD.setBackColor(0, 0, 0);
-      
+    myGLCD.setBackColor(0, 0, 0);
+    
     myGLCD.print("PORT CONNECTED TO        ", LEFT, 0);
   }
   else {
@@ -68,7 +68,7 @@ void portStatus(bool portstat){
     myGLCD.setColor(130, 130, 130);
     myGLCD.print("PORT CLOSED           ", LEFT, 0);
   }
-  
+
 }
 
 void httpStatus(bool htpstat){
@@ -77,7 +77,7 @@ void httpStatus(bool htpstat){
     myGLCD.setFont(SmallFont);
     myGLCD.print("HTTP CONNECTED", LEFT + 15, 15);
   }
-    else  {
+  else  {
     myGLCD.setFont(SmallFont);
     myGLCD.setColor(130, 130, 130);
     myGLCD.print("HTTP DISCONNECTED", LEFT + 15, 15);
@@ -87,8 +87,8 @@ void httpStatus(bool htpstat){
 void sinceLastvisit(String lVisit){
 
   if (_hpstats == false) {
-     myGLCD.setFont(SmallFont);
-     myGLCD.setColor(130, 130, 130);
+    myGLCD.setFont(SmallFont);
+    myGLCD.setColor(130, 130, 130);
     myGLCD.print("LAST VISIT : UNKNOWN", LEFT + 15, 30);
   }
 
@@ -96,44 +96,44 @@ void sinceLastvisit(String lVisit){
     myGLCD.setFont(SmallFont);
     myGLCD.print("LAST VISIT : " + lVisit + "S AGO", LEFT + 15, 30);
   }
-  
+
 }
 // End Stats display
 //
 void loop()
 {
 
- delay(2000);                    
+  delay(2000);                    
   Serial.println("println alive");
   Serial.write("write alive !"); //Send "write alive !" to the PC
   myGLCD.setColor(0, 255, 0);
   myGLCD.setBackColor(0, 0, 0);
   myGLCD.setFont(BigFont);
- /* myGLCD.print(" !\"#$%&'()*+,-./", CENTER, 0);
-  myGLCD.print("0123456789:;<=>?", CENTER, 16);
-  myGLCD.print("@ABCDEFGHIJKLMNO", CENTER, 32);
-  myGLCD.print("PQRSTUVWXYZ[\\]^_", CENTER, 48);
-  myGLCD.print("`abcdefghijklmno", CENTER, 64);
-  myGLCD.print("pqrstuvwxyz{|}~ ", CENTER, 80);*/
+  /* myGLCD.print(" !\"#$%&'()*+,-./", CENTER, 0);
+myGLCD.print("0123456789:;<=>?", CENTER, 16);
+myGLCD.print("@ABCDEFGHIJKLMNO", CENTER, 32);
+myGLCD.print("PQRSTUVWXYZ[\\]^_", CENTER, 48);
+myGLCD.print("`abcdefghijklmno", CENTER, 64);
+myGLCD.print("pqrstuvwxyz{|}~ ", CENTER, 80);*/
 
- /* myGLCD.setFont(SmallFont);
-  myGLCD.print(" !\"#$%&'()*+,-./0123456789:;<=>?", CENTER, 120);
-  myGLCD.print("@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_", CENTER, 132);
-  myGLCD.print("`abcdefghijklmnopqrstuvwxyz{|}~ ", CENTER, 54);*/
-
-  
+  /* myGLCD.setFont(SmallFont);
+myGLCD.print(" !\"#$%&'()*+,-./0123456789:;<=>?", CENTER, 120);
+myGLCD.print("@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_", CENTER, 132);
+myGLCD.print("`abcdefghijklmnopqrstuvwxyz{|}~ ", CENTER, 54);*/
 
 
- // Read serial input:
+
+
+  // Read serial input:
   while (Serial.available() > 0) {
     portStatus(true);
     int inChar = Serial.read();
 
 
     
-       myGLCD.setColor(0, 255, 100);
-   myGLCD.setFont(BigFont);
-myGLCD.print(inChar, CENTER, 187);
+    myGLCD.setColor(0, 255, 100);
+    myGLCD.setFont(BigFont);
+    myGLCD.print(inChar, CENTER, 187);
 
 
     if (isDigit(inChar)) {
@@ -144,70 +144,70 @@ myGLCD.print(inChar, CENTER, 187);
     // if you get a newline, print the string, then the string's value:
     if (inChar == '\n') {
 
-if (inString == "007") {
-      Serial.end();
-      portStatus(true);
-      CleanAreaScreen();
-      DisconnectedBitmap();
-    //myGLCD.clrScr();
-    inString = "";
-}
-else {
+      if (inString == "007") {
+        Serial.end();
+        portStatus(true);
+        CleanAreaScreen();
+        DisconnectedBitmap();
+        //myGLCD.clrScr();
+        inString = "";
+      }
+      else {
 
-      myGLCD.setColor(140, 0, 0);
-   //   myGLCD.printNumI(888,CENTER,120);
+        myGLCD.setColor(140, 0, 0);
+        //   myGLCD.printNumI(888,CENTER,120);
         myGLCD.setBackColor(0, 0, 0);
-       delay(150);
-       myGLCD.setBackColor(0, 0, 0);
-      Serial.print("Value:");
-      Serial.println(inString.toInt());
-      Serial.print("String: ");
-      Serial.println(inString);
-    //  myGLCD.print(inString, CENTER, 120);
-    myGLCD.setColor(0, 255, 100);
-   myGLCD.setFont(SixteenSegment64x96Num);
-    myGLCD.setBackColor(50, 50, 50);
+        delay(150);
+        myGLCD.setBackColor(0, 0, 0);
+        Serial.print("Value:");
+        Serial.println(inString.toInt());
+        Serial.print("String: ");
+        Serial.println(inString);
+        //  myGLCD.print(inString, CENTER, 120);
+        myGLCD.setColor(0, 255, 100);
+        myGLCD.setFont(SixteenSegment64x96Num);
+        myGLCD.setBackColor(50, 50, 50);
 
-    // si visteurs == 0 draw le tilde
-    if (inString.toInt() == 0)
-    {
-      CleanAreaScreen(); 
-      myGLCD.drawBitmap(120, 100, 80, 80, tildezerov);
-     // myGLCD.print("***",LEFT,80);
+        // si visteurs == 0 draw le tilde
+        if (inString.toInt() == 0)
+        {
+          CleanAreaScreen(); 
+          myGLCD.drawBitmap(120, 100, 80, 80, tildezerov);
+          // myGLCD.print("***",LEFT,80);
+        }
+        // sinon display le nombre de visiteurs
+        else {
+          CleanAreaScreen();
+          myGLCD.setColor(230, 230, 230); // set color of inString (visitors)
+          myGLCD.setFont(Roboto64x96Num);
+          myGLCD.printNumI(inString.toInt(),CENTER,80);
+        }
+        // clear the string for new input:
+        myGLCD.setBackColor(0, 0, 0);
+        delay(2050);
+        inString = "";
+        
+        // myGLCD.print("", CENTER, 120);
+        delay(2050);
+        inString = "";
+        //  myGLCD.clrScr();
+      }
+      portStatus(false);
+      httpStatus(false);
+
     }
-    // sinon display le nombre de visiteurs
-    else {
-      CleanAreaScreen();
-      myGLCD.setColor(230, 230, 230); // set color of inString (visitors)
-      myGLCD.setFont(Roboto64x96Num);
-      myGLCD.printNumI(inString.toInt(),CENTER,80);
-    }
-      // clear the string for new input:
-       myGLCD.setBackColor(0, 0, 0);
-          delay(2050);
-       inString = "";
-      
-      // myGLCD.print("", CENTER, 120);
-      delay(2050);
-       inString = "";
-      //  myGLCD.clrScr();
-    }
-    portStatus(false);
-  httpStatus(false);
-  
-}
 
   }
-  
+
 
 }
 
 void DisconnectedBitmap() {
-   myGLCD.drawBitmap(120, 100, 80, 80, finaldisco);
+  myGLCD.drawBitmap(120, 100, 80, 80, finaldisco);
 }
 
 void CleanAreaScreen() { // just drawing some rectangles
 
-      myGLCD.setColor(50, 50, 50); // set color of clean bg
-      myGLCD.fillRect(30,60,280,190); // bg clean the three dots
+  myGLCD.setColor(50, 50, 50); // set color of clean bg
+  myGLCD.fillRect(30,60,280,190); // bg clean the three dots
 }
