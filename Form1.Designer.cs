@@ -47,18 +47,19 @@
             this.label6 = new System.Windows.Forms.Label();
             this.Inp_Domain = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.Inp_NumericHours = new System.Windows.Forms.NumericUpDown();
             this.BtnVerifyUsrUrl = new System.Windows.Forms.Button();
             this.ClearDomain = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.TitleBar = new System.Windows.Forms.Panel();
             this.Arduistats = new System.Windows.Forms.Label();
             this.LaBouleMagique = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.InputServerTime = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).BeginInit();
+            this.labelSystemTime = new System.Windows.Forms.Label();
+            this.labelServerTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.TitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +89,7 @@
             // PortInfos
             // 
             this.PortInfos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PortInfos.Location = new System.Drawing.Point(353, 414);
+            this.PortInfos.Location = new System.Drawing.Point(353, 457);
             this.PortInfos.Name = "PortInfos";
             this.PortInfos.Size = new System.Drawing.Size(75, 23);
             this.PortInfos.TabIndex = 2;
@@ -100,7 +101,7 @@
             // 
             this.btn_listenToArduino.Enabled = false;
             this.btn_listenToArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_listenToArduino.Location = new System.Drawing.Point(521, 385);
+            this.btn_listenToArduino.Location = new System.Drawing.Point(521, 428);
             this.btn_listenToArduino.Name = "btn_listenToArduino";
             this.btn_listenToArduino.Size = new System.Drawing.Size(75, 23);
             this.btn_listenToArduino.TabIndex = 3;
@@ -124,7 +125,7 @@
             // btn_startphpfetch
             // 
             this.btn_startphpfetch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_startphpfetch.Location = new System.Drawing.Point(434, 414);
+            this.btn_startphpfetch.Location = new System.Drawing.Point(434, 457);
             this.btn_startphpfetch.Name = "btn_startphpfetch";
             this.btn_startphpfetch.Size = new System.Drawing.Size(75, 23);
             this.btn_startphpfetch.TabIndex = 6;
@@ -143,7 +144,7 @@
             // 
             this.Btn_GetCurPortInfo.Enabled = false;
             this.Btn_GetCurPortInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(353, 385);
+            this.Btn_GetCurPortInfo.Location = new System.Drawing.Point(353, 428);
             this.Btn_GetCurPortInfo.Name = "Btn_GetCurPortInfo";
             this.Btn_GetCurPortInfo.Size = new System.Drawing.Size(116, 23);
             this.Btn_GetCurPortInfo.TabIndex = 8;
@@ -171,7 +172,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(353, 339);
+            this.label3.Location = new System.Drawing.Point(353, 382);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 28);
             this.label3.TabIndex = 13;
@@ -238,30 +239,11 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(441, 350);
+            this.label8.Location = new System.Drawing.Point(441, 393);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(93, 15);
             this.label8.TabIndex = 21;
             this.label8.Text = "At your own risk";
-            // 
-            // Inp_NumericHours
-            // 
-            this.Inp_NumericHours.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Inp_NumericHours.Location = new System.Drawing.Point(353, 215);
-            this.Inp_NumericHours.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.Inp_NumericHours.Minimum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            -2147483648});
-            this.Inp_NumericHours.Name = "Inp_NumericHours";
-            this.Inp_NumericHours.Size = new System.Drawing.Size(63, 19);
-            this.Inp_NumericHours.TabIndex = 23;
-            this.Inp_NumericHours.ValueChanged += new System.EventHandler(this.Inp_NumericHours_ValueChanged);
             // 
             // BtnVerifyUsrUrl
             // 
@@ -284,15 +266,6 @@
             this.ClearDomain.Text = "clr";
             this.ClearDomain.UseVisualStyleBackColor = true;
             this.ClearDomain.Click += new System.EventHandler(this.ClearDomain_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(422, 219);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 15);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "+/- H | adjust time server";
             // 
             // button1
             // 
@@ -319,7 +292,7 @@
             this.TitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitleBar.Location = new System.Drawing.Point(0, 0);
             this.TitleBar.Name = "TitleBar";
-            this.TitleBar.Size = new System.Drawing.Size(605, 38);
+            this.TitleBar.Size = new System.Drawing.Size(607, 38);
             this.TitleBar.TabIndex = 27;
             this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
             // 
@@ -337,7 +310,7 @@
             // LaBouleMagique
             // 
             this.LaBouleMagique.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LaBouleMagique.Location = new System.Drawing.Point(353, 262);
+            this.LaBouleMagique.Location = new System.Drawing.Point(353, 310);
             this.LaBouleMagique.Name = "LaBouleMagique";
             this.LaBouleMagique.Size = new System.Drawing.Size(243, 56);
             this.LaBouleMagique.TabIndex = 28;
@@ -355,38 +328,80 @@
             this.label7.TabIndex = 29;
             this.label7.Text = "2";
             // 
-            // textBox1
+            // InputServerTime
             // 
-            this.textBox1.Location = new System.Drawing.Point(353, 233);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(33, 23);
-            this.textBox1.TabIndex = 30;
+            this.InputServerTime.Location = new System.Drawing.Point(353, 269);
+            this.InputServerTime.MaxLength = 2;
+            this.InputServerTime.Name = "InputServerTime";
+            this.InputServerTime.Size = new System.Drawing.Size(33, 23);
+            this.InputServerTime.TabIndex = 30;
+            this.InputServerTime.TextChanged += new System.EventHandler(this.InputServerTime_TextChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(521, 414);
+            this.button2.Location = new System.Drawing.Point(521, 457);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 31;
-            this.button2.Text = "button2";
+            this.button2.Text = "btn_sendCommand";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // labelSystemTime
+            // 
+            this.labelSystemTime.AutoSize = true;
+            this.labelSystemTime.Location = new System.Drawing.Point(392, 263);
+            this.labelSystemTime.Name = "labelSystemTime";
+            this.labelSystemTime.Size = new System.Drawing.Size(78, 15);
+            this.labelSystemTime.TabIndex = 32;
+            this.labelSystemTime.Text = "System time :";
+            // 
+            // labelServerTime
+            // 
+            this.labelServerTime.AutoSize = true;
+            this.labelServerTime.Location = new System.Drawing.Point(398, 282);
+            this.labelServerTime.Name = "labelServerTime";
+            this.labelServerTime.Size = new System.Drawing.Size(72, 15);
+            this.labelServerTime.TabIndex = 33;
+            this.labelServerTime.Text = "Server time :";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(364, 220);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(204, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Add or remove hours for adjust server ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(408, 234);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(113, 15);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "time to current time";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(605, 453);
+            this.ClientSize = new System.Drawing.Size(607, 495);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelServerTime);
+            this.Controls.Add(this.labelSystemTime);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.InputServerTime);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.LaBouleMagique);
             this.Controls.Add(this.listPort);
             this.Controls.Add(this.TitleBar);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.ClearDomain);
             this.Controls.Add(this.BtnVerifyUsrUrl);
-            this.Controls.Add(this.Inp_NumericHours);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.Inp_Domain);
             this.Controls.Add(this.label6);
@@ -409,7 +424,6 @@
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Arduistats";
-            ((System.ComponentModel.ISupportInitialize)(this.Inp_NumericHours)).EndInit();
             this.TitleBar.ResumeLayout(false);
             this.TitleBar.PerformLayout();
             this.ResumeLayout(false);
@@ -437,17 +451,19 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox Inp_Domain;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown Inp_NumericHours;
         private System.Windows.Forms.Button BtnVerifyUsrUrl;
         private System.Windows.Forms.Button ClearDomain;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel TitleBar;
         private System.Windows.Forms.Label Arduistats;
         private System.Windows.Forms.Button LaBouleMagique;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox InputServerTime;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelSystemTime;
+        private System.Windows.Forms.Label labelServerTime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

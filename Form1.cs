@@ -75,7 +75,7 @@ namespace Arduistats
                 string _serverTime = ACConfigManager.getValue("servertime");
                 int servtimeInt = Int16.Parse(_serverTime);
                 int hours = servtimeInt / 3600;
-                Inp_NumericHours.Value = hours;
+                InputServerTime.Text = hours.ToString();
                 //_servertime > convert hours > covert decimal
                 // Inp_NumericHours.Value = _serverTime;
                 string _consideroff = ACConfigManager.getValue("consideroff");
@@ -209,8 +209,12 @@ namespace Arduistats
                     Int16.Parse(splitString[4]),
                     Int16.Parse(splitString[5]));
                 Debug.WriteLine("DateTime a =  " + a);
+                //Affiche le datetime reçu
+                labelServerTime.Text = a.ToString() ;
                 // DateTime b = new DateTime();
                 var now = DateTime.Now;
+                //Affiche le temps réel utilisateur
+                labelSystemTime.Text = now.ToString();
                 double secs = now.Subtract(a).TotalSeconds; // ajouter les x secs avant la soustraction
                 // on ajoute le time reçu du serveur et on rajoute l'input user
                 double variableSecs = secs -= secondstoadd; // TODO brainfuck
@@ -469,13 +473,13 @@ namespace Arduistats
         /// </summary>
         private void Inp_NumericHours_ValueChanged(object sender, EventArgs e)
         {
-            var actualH = Inp_NumericHours.Text;
+          /*  var actualH = Inp_NumericHours.Text;
             var todouble = Int16.Parse(actualH);
             secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
             ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd.ToString());
 
             OutToRichLog("TEST", "customUserHours " + secondstoadd);
-            Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
+            Debug.WriteLine("timespantimespantimespan: " + secondstoadd);*/
         }
 
         private void Inp_Domain_TextChanged(object sender, EventArgs e)
@@ -565,9 +569,26 @@ namespace Arduistats
         {
             selectedPort = listPort.GetItemText(listPort.SelectedItem);
         }
-        private void SendSerialEndToArduino
+        private void SendSerialEndToArduino()
         {
+            // only decimal working for communicate to inString
+            port.WriteLine("007");
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SendSerialEndToArduino();
+        }
+
+        private void InputServerTime_TextChanged(object sender, EventArgs e)
+        {
+            var actualH = InputServerTime.Text;
+            var todouble = Int16.Parse(actualH);
+            secondstoadd = TimeSpan.FromHours(todouble).TotalSeconds;
+            ACConfigManager.AddUpdateAppSettings("servertime", secondstoadd.ToString());
+
+            OutToRichLog("TEST", "customUserHours " + secondstoadd);
+            Debug.WriteLine("timespantimespantimespan: " + secondstoadd);
         }
     }
 }

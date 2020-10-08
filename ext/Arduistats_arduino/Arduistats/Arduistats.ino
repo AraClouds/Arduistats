@@ -33,6 +33,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.write("ALL ABOUT CIRCUITS!");//Send "ALL ABOUT CIRCUITS!" to the PC
+    pinMode(LED_BUILTIN, OUTPUT);
   myGLCD.InitLCD();
   myGLCD.clrScr();
     portStatus(false);
@@ -127,6 +128,14 @@ void loop()
   while (Serial.available() > 0) {
     portStatus(true);
     int inChar = Serial.read();
+
+
+    
+       myGLCD.setColor(0, 255, 100);
+   myGLCD.setFont(BigFont);
+myGLCD.print(inChar, CENTER, 187);
+
+
     if (isDigit(inChar)) {
       httpStatus(true);
       // convert the incoming byte to a char and add it to the string:
@@ -134,7 +143,11 @@ void loop()
     }
     // if you get a newline, print the string, then the string's value:
     if (inChar == '\n') {
-      
+
+if (inString == "007") {
+myGLCD.clrScr();
+inString = "";
+}
       myGLCD.setColor(140, 0, 0);
    //   myGLCD.printNumI(888,CENTER,120);
         myGLCD.setBackColor(0, 0, 0);
@@ -148,13 +161,15 @@ void loop()
     myGLCD.setColor(0, 255, 100);
    myGLCD.setFont(SixteenSegment64x96Num);
     myGLCD.setBackColor(50, 50, 50);
-    
+
+    // si visteurs == 0 draw le tilde
     if (inString.toInt() == 0)
     {
       CleanAreaScreen(); 
       myGLCD.drawBitmap(120, 100, 80, 80, tildezerov);
      // myGLCD.print("***",LEFT,80);
     }
+    // sinon display le nombre de visiteurs
     else {
       CleanAreaScreen();
       myGLCD.setColor(230, 230, 230); // set color of inString (visitors)
