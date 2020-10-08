@@ -31,7 +31,7 @@ namespace Arduistats
         string _storedUserOut;
         //Config
         public string userDomain = "";
-        public string txtloc = "/ct/users.txt"; 
+        public string txtloc = "/ct/users.txt";
         int refresh = 5000;
         private bool advancedDebug;
         private double secondstoadd = 0;
@@ -49,7 +49,7 @@ namespace Arduistats
 
 
         DropShadow shadow = new DropShadow();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -99,7 +99,7 @@ namespace Arduistats
         private void DisableInputURLctrls()
         {
             string rawDomain = ACConfigManager.getValue("userdomain");
-          //  string trimmDomain = rawDomain;
+            //  string trimmDomain = rawDomain;
 
             Uri myUri = new Uri(rawDomain);
             string trimmDomain = myUri.Host;  // host is "www.contoso.com"
@@ -117,12 +117,12 @@ namespace Arduistats
             OutToRichLog("Com", "Ports found : ");
             GetPortInformation();
             // TODO not working
- 
+
 
             foreach (string port in ports)
             {
                 listPort.Items.Add(port);
-                
+
                 if (ports[0] != null)
                 {
                     listPort.SelectedItem = ports[0];
@@ -131,16 +131,16 @@ namespace Arduistats
 
         }
 
-        async  Task<string> GetTxt()
+        async Task<string> GetTxt()
         {
-          //  string tamereee = userDomain;
+            //  string tamereee = userDomain;
             HttpClient client = new HttpClient();
             string _domain = ACConfigManager.getValue("userdomain");
             string result = await client.GetStringAsync(_domain);
             if (result != null)
             {
                 //   ishttpConnected = true;
-               // OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
+                // OutToRichLog("HTTP", "ITS OKAY FROM TASK : ");
 
             }
             return result;
@@ -153,7 +153,7 @@ namespace Arduistats
             timer1.Interval = refresh; // in miliseconds
             timer1.Start();
             DisplayOnlyOnce("started");
-            
+
             // TODO send is connected write toa rduino
         }
 
@@ -180,9 +180,9 @@ namespace Arduistats
             else
             {
                 if (advancedDebug == true) { OutToRichLog("HTTP", "CheckDifferentCounting() ELSE"); }
-             //   port.WriteLine("0");
+                //   port.WriteLine("0");
                 // OutToRichLog("PHP", "No different count detected");
-                  userout = _storedUserOut;
+                userout = _storedUserOut;
             }
         }
         /// <summary>
@@ -192,7 +192,7 @@ namespace Arduistats
         /// </summary>
         private async void Timer1_Tick(object sender, EventArgs e)
         {
-             try
+            try
             {
                 Debug.WriteLine("----------Timer1_Tick > TRY-----------");
                 string fetchedTxt = await GetTxt();
@@ -202,11 +202,11 @@ namespace Arduistats
                 var value = freq;
                 userout = freq.ToString();
                 httpStatus.Text = "Connected";
-                
+
                 string lastWrittenUser = fetchedTxt.Substring(fetchedTxt.LastIndexOf("=") + 1);
                 Debug.WriteLine("lastWrittenUser : " + lastWrittenUser);
                 string[] splitString = lastWrittenUser.Split(',');
-            
+
                 // la date d'édition du fichier nous donnera le timeout visiteur
                 // convertir les deux en secondes, soustraire l'actual time avec le lastwrittenUser et si var time > x secondes write 0 a arduino
                 DateTime a = new DateTime(
@@ -218,7 +218,7 @@ namespace Arduistats
                     Int16.Parse(splitString[5]));
                 Debug.WriteLine("DateTime a =  " + a);
                 //Affiche le datetime reçu
-                labelServerTime.Text = a.ToString() ;
+                labelServerTime.Text = a.ToString();
                 // DateTime b = new DateTime();
                 var now = DateTime.Now;
                 //Affiche le temps réel utilisateur
@@ -235,23 +235,25 @@ namespace Arduistats
                 Debug.WriteLine(now.Subtract(a).TotalSeconds);
                 advancedDebug = true;
                 // mettre en variable option
-                if (isecGap > 40) {
+                if (isecGap > 40)
+                {
                     userout = "0";
                     CheckDifferentCounting(userout, _storedUserOut);
-                    if (advancedDebug == true) { OutToRichLog("HTTP", "No visitors since " + isecGap + " secs\n Sent 0 to arduino" ); }
-                  //  port.WriteLine("0");
+                    if (advancedDebug == true) { OutToRichLog("HTTP", "No visitors since " + isecGap + " secs\n Sent 0 to arduino"); }
+                    //  port.WriteLine("0");
 
-                } else
-                {
-                    CheckDifferentCounting(userout, _storedUserOut);  
                 }
-              //  port.WriteLine(secGap);
+                else
+                {
+                    CheckDifferentCounting(userout, _storedUserOut);
+                }
+                //  port.WriteLine(secGap);
                 Debug.WriteLine("FINAL GAP : " + secGap + "\n");
             }
             catch (HttpRequestException ex)
             {
 
-               // timer1.Stop();
+                // timer1.Stop();
                 httpStatus.Text = "Not connected";
                 var httpmessage = ex.Message;
                 OutToRichLog("HTTP", httpmessage.ToString());
@@ -268,7 +270,7 @@ namespace Arduistats
                 var name = property.GetPropertyValue("Name");
                 var desc = property.GetPropertyValue("Description");
                 var status = property.GetPropertyValue("Status");
-               
+
                 if (name != null && name.ToString().Contains(selectedport))
                 {
                     var portInfo = new SerialPortInfo(property);
@@ -299,7 +301,7 @@ namespace Arduistats
         }
         private void Btn_serielConnect_Click(object sender, EventArgs e)
         {
-    
+
             // TODO IMPORTANT : trouver un moyen de disconnect proprement
             // selectedPort = listPort.GetItemText(listPort.SelectedItem);
             port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
@@ -314,7 +316,7 @@ namespace Arduistats
             text_iSconnected.Text = isConnected.ToString();
             text_iSconnected.Text = port.IsOpen.ToString();
 
-            if (isConnected == true) 
+            if (isConnected == true)
             {
 
                 try
@@ -333,10 +335,10 @@ namespace Arduistats
                 // passer la value disconneced à l'arduino
 
                 isConnected = false;
-                OutToRichLog("Com","Closing " + port.PortName);
+                OutToRichLog("Com", "Closing " + port.PortName);
 
             }
-            else if (isConnected == false) 
+            else if (isConnected == false)
             {
                 btn_serielConnect.Text = "Disconnect";
                 try
@@ -348,17 +350,14 @@ namespace Arduistats
                     {
                         UnlockButton(LaBouleMagique);
                     }
-                    
-                    //faire un fade ou un truc qui montre que c co
-                    // TODO passer la value connected à l'arduino
                     OutToRichLog("Com", "Opening " + port.PortName + "...");
                     isConnected = true;
-                //    OutToRichLog("HTTP", "Trying to read txt file.. ");
-                    
+                    //    OutToRichLog("HTTP", "Trying to read txt file.. ");
+
                 }
                 catch (UnauthorizedAccessException unauth)
                 {
-                    OutToRichLog("Com", "Port is open somewhere else \n" + unauth );
+                    OutToRichLog("Com", "Port is open somewhere else \n" + unauth);
                 }
             }
 
@@ -377,8 +376,8 @@ namespace Arduistats
         {
             string selectedPort = listPort.GetItemText(listPort.SelectedItem);
             GetCurrentPortInformation(selectedPort);
-           // string a = port.ReadExisting();
-          //  Debug.WriteLine(a);
+            // string a = port.ReadExisting();
+            //  Debug.WriteLine(a);
         }
 
         private void Btn_listenToArduino_Click(object sender, EventArgs e)
@@ -389,10 +388,10 @@ namespace Arduistats
 
         private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-                string line = port.ReadLine();
-                this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
-                RichLogBox.AppendText(line + "\r\n");
-                RichLogBox.ScrollToCaret();
+            string line = port.ReadLine();
+            this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
+            RichLogBox.AppendText(line + "\r\n");
+            RichLogBox.ScrollToCaret();
         }
 
         private delegate void LineReceivedEvent(string line);
@@ -407,7 +406,6 @@ namespace Arduistats
 
         private void Btn_StartPHPfetch_Click(object sender, EventArgs e)
         {
-            // TODO RICH START PHP LOOP
             InitTimer();
         }
 
@@ -423,7 +421,7 @@ namespace Arduistats
         {
             if (type == "HTTP")
             {
-               // string myfiles = Rich
+                // string myfiles = Rich
                 RichLogBox.ForeColor = System.Drawing.Color.LightGreen;
                 RichLogBox.AppendText("@ " + output + "\r\n");
                 RichLogBox.ScrollToCaret();
@@ -476,16 +474,14 @@ namespace Arduistats
 
         private void CloseAll()
         {
-            //TODO Disconnected app on arduino (bitmap)
-            //  Debug.WriteLine(port.IsOpen);
-            //  port.
+            // String
             SendSerialEndToArduino();
         }
 
 
         private void Inp_Domain_TextChanged(object sender, EventArgs e)
         {
-            userDomain = Inp_Domain.Text; 
+            userDomain = Inp_Domain.Text;
         }
 
 
@@ -527,13 +523,13 @@ namespace Arduistats
 
         private void ClearDomain_Click(object sender, EventArgs e)
         {
-          //  ACConfigManager.ClearValue();
+            //  ACConfigManager.ClearValue();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-          //  Environment.Exit();
+            //  Environment.Exit();
         }
         //Capture event (sours) de la title bar
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -565,7 +561,7 @@ namespace Arduistats
         {
             OutToRichLog("HTTP", "Starting, please wait...");
             InitTimer();
-            
+
         }
 
         private void listPort_SelectedIndexChanged(object sender, EventArgs e)
