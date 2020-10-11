@@ -1,13 +1,8 @@
 bin
 bin/Debug
 obj/Debug
-.vs/Arduistats/v16/.suo
-.vs/Arduistats/v16/.suo
-.vs/Arduistats/v16/.suo
+.vs
 obj/Debug/netcoreapp3.1/Arduistats.assets.cache
-.vs/Arduistats/v16/.suo
-.vs/Arduistats/v16/.suo
-.vs/Arduistats/DesignTimeBuild/.dtbcache.v2
 obj/Debug/netcoreapp3.1/Arduistats.csproj.FileListAbsolute.txt
 obj/Debug/netcoreapp3.1/Arduistats.assets.cache
 obj/Debug/netcoreapp3.1/Arduistats.assets.cache
